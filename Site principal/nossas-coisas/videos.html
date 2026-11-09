@@ -1,0 +1,389 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../../assets/css/InterfaceProjeto-Leticia.css">
+    <script src="../../assets/js/cursor-romantico.js" defer></script>
+    <title>Vídeos | Projeto Letícia</title>
+    <link rel="stylesheet" href="../../assets/css/menu-romantico.css">
+    <script src="../../assets/js/menu-romantico.js" defer></script>
+    <link rel="stylesheet" href="../../assets/css/brand-doodles.css">
+    <link rel="stylesheet" href="../../assets/css/progresso-site.css">
+    <script src="../../assets/js/progresso-site.js" defer></script>
+    <link rel="stylesheet" href="../../assets/css/identidade-visual.css">
+    <style>
+        body.video-page {
+            min-height: 100vh;
+            padding: 0 clamp(0.75rem, 3vw, 2rem) 2rem;
+            background: #fbf8f2;
+        }
+
+        .video-page .menu-romantico {
+            margin-top: 0.75rem;
+        }
+
+        .video-library {
+            width: min(100%, 76rem);
+            margin: 1.25rem auto 0;
+        }
+
+        .video-topbar {
+            display: grid;
+            grid-template-columns: auto minmax(12rem, 32rem);
+            align-items: center;
+            justify-content: space-between;
+            gap: 1rem;
+            margin: 0 0 1.1rem;
+            padding: 0 0 1rem;
+            border-bottom: 1px solid #e6d9c8;
+        }
+
+        .video-brand {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.7rem;
+            color: #78374f;
+            font: 700 1.08rem/1.2 Georgia, "Times New Roman", serif;
+            letter-spacing: 0.01em;
+        }
+
+        .video-brand-mark {
+            display: grid;
+            width: 2.45rem;
+            height: 1.7rem;
+            place-items: center;
+            border-radius: 0.55rem;
+            background: #78374f;
+            color: #fffaf5;
+            font: 700 0.72rem/1 Arial, sans-serif;
+        }
+
+        .video-search {
+            display: flex;
+            min-width: 0;
+        }
+
+        .video-search .sr-only {
+            position: absolute;
+            width: 1px;
+            height: 1px;
+            overflow: hidden;
+            clip: rect(0, 0, 0, 0);
+            white-space: nowrap;
+            clip-path: inset(50%);
+        }
+
+        .video-search input {
+            width: 100%;
+            min-width: 0;
+            height: 2.65rem;
+            padding: 0.55rem 0.9rem;
+            border: 1px solid #d8cbbd;
+            border-right: 0;
+            border-radius: 999px 0 0 999px;
+            background: #fffdfa;
+            color: #3d2932;
+            font: inherit;
+        }
+
+        .video-search input:focus-visible {
+            z-index: 1;
+            border-color: #b5965b;
+            outline: 2px solid rgb(181 150 91 / 35%);
+            outline-offset: 1px;
+        }
+
+        .video-search button {
+            display: grid;
+            flex: 0 0 3.2rem;
+            place-items: center;
+            padding: 0;
+            border: 1px solid #d8cbbd;
+            border-radius: 0 999px 999px 0;
+            background: #f3ece2;
+            color: #78374f;
+            cursor: pointer;
+        }
+
+        .video-search button:hover {
+            background: #eee3d7;
+        }
+
+        .video-filters {
+            display: flex;
+            gap: 0.55rem;
+            overflow-x: auto;
+            margin: 0 0 1.25rem;
+            padding: 0.15rem 0.1rem 0.45rem;
+            scrollbar-width: thin;
+        }
+
+        .video-filter {
+            flex: 0 0 auto;
+            min-height: 2rem;
+            padding: 0.4rem 0.85rem;
+            border: 1px solid #e6d9c8;
+            border-radius: 999px;
+            background: #f2ece4;
+            color: #5e444b;
+            font-family: inherit;
+            font-size: 0.82rem;
+            font-weight: 500;
+            line-height: 1.2;
+            cursor: pointer;
+        }
+
+        .video-filter[aria-pressed="true"] {
+            border-color: #78374f;
+            background: #78374f;
+            color: #fffaf5;
+        }
+
+        .video-catalog-heading {
+            display: flex;
+            flex-wrap: wrap;
+            align-items: baseline;
+            justify-content: space-between;
+            gap: 0.5rem 1rem;
+            margin-bottom: 1rem;
+        }
+
+        .video-catalog-heading h1 {
+            margin: 0;
+            padding: 0;
+            border: 0;
+            background: transparent;
+            box-shadow: none;
+            color: #3d2932;
+            font: 650 clamp(1.2rem, 3vw, 1.55rem)/1.3 "Segoe UI", sans-serif;
+            letter-spacing: 0;
+        }
+
+        .video-catalog-count {
+            margin: 0;
+            color: #705b61;
+            font-size: 0.84rem;
+        }
+
+        .video-grid {
+            display: grid;
+            grid-template-columns: repeat(3, minmax(0, 1fr));
+            align-items: stretch;
+            gap: clamp(0.9rem, 2vw, 1.35rem);
+        }
+
+        .video-card {
+            display: flex;
+            min-width: 0;
+            flex-direction: column;
+            padding: 0.55rem;
+            border: 1px solid #e6d9c8;
+            border-radius: 1rem;
+            background: #fffdfa;
+            box-shadow: 0 8px 22px rgb(61 41 50 / 7%);
+        }
+
+        .video-card-player {
+            display: block;
+            width: 100%;
+            aspect-ratio: 16 / 9;
+            border: 0;
+            border-radius: 0.7rem;
+            background: #201a1d;
+            object-fit: contain;
+        }
+
+        .video-card-title {
+            display: -webkit-box;
+            min-height: 2.7rem;
+            overflow: hidden;
+            margin: 0.8rem 0 0.3rem;
+            padding: 0;
+            border: 0;
+            border-radius: 0;
+            background: transparent;
+            box-shadow: none;
+            color: #3d2932;
+            font: 650 0.98rem/1.4 "Segoe UI", sans-serif;
+            letter-spacing: 0;
+            -webkit-box-orient: vertical;
+            -webkit-line-clamp: 2;
+        }
+
+        .video-card[hidden] {
+            display: none;
+        }
+
+        .video-card-meta {
+            margin: auto 0 0;
+            color: #705b61;
+            font-size: 0.8rem;
+        }
+
+        .video-empty-state {
+            grid-column: 1 / -1;
+            margin: 0;
+            padding: 1rem;
+            border: 1px dashed #d8cbbd;
+            border-radius: 0.8rem;
+            color: #705b61;
+            font-size: 0.88rem;
+        }
+
+        .video-empty-state[hidden] {
+            display: none;
+        }
+
+        @media (max-width: 760px) {
+            .video-grid {
+                grid-template-columns: repeat(2, minmax(0, 1fr));
+            }
+        }
+
+        @media (max-width: 520px) {
+            .video-topbar {
+                grid-template-columns: minmax(0, 1fr);
+                gap: 0.75rem;
+            }
+
+            .video-search {
+                width: 100%;
+            }
+
+            .video-grid {
+                grid-template-columns: minmax(0, 1fr);
+            }
+        }
+
+    </style>
+</head>
+<body class="ornamento-rosas video-page">
+<nav class="menu-romantico" aria-label="Navegação desta seção">
+    <span class="indicador" aria-hidden="true"></span>
+    <div class="menu-item"><a href="Botoes.html" data-voltar>Voltar</a></div>
+    <div class="menu-item">
+        <button class="menu-trigger" type="button">Nossas coisas</button>
+        <div class="submenu" aria-label="Fotos, vídeos e presentes">
+            <a href="Fotos.html">Fotos</a>
+            <a href="videos.html">Vídeos</a>
+            <a href="presentes.html">Presentes</a>
+        </div>
+    </div>
+</nav>
+    <main class="video-library">
+        <header class="video-topbar">
+            <div class="video-brand" aria-label="Memórias em vídeo">
+                <span class="video-brand-mark" aria-hidden="true">▶</span>
+                <span>Memórias</span>
+            </div>
+            <form class="video-search" role="search">
+                <label class="sr-only" for="video-search-input">Pesquisar vídeos</label>
+                <input id="video-search-input" type="search" placeholder="Pesquisar vídeos" autocomplete="off">
+                <button type="submit" aria-label="Pesquisar">⌕</button>
+            </form>
+        </header>
+
+        <nav class="video-filters" aria-label="Filtrar vídeos">
+            <button class="video-filter" type="button" data-video-filter="all" aria-pressed="true">Todos</button>
+            <button class="video-filter" type="button" data-video-filter="encontro" aria-pressed="false">Encontro inesperado</button>
+        </nav>
+
+        <section aria-labelledby="videos">
+            <header class="video-catalog-heading">
+                <h1 id="videos">Vídeos do nosso encontro</h1>
+                <p class="video-catalog-count" aria-live="polite"><span id="video-result-count">3</span> vídeos</p>
+            </header>
+            <div class="video-grid" aria-label="Todos os vídeos do nosso encontro">
+                <article class="video-card" data-video-category="encontro">
+                    <video
+                        class="video-card-player"
+                        controls
+                        playsinline
+                        preload="none"
+                        poster="../../Fotos-nossas/Encontro%20inesperado%20kkkkk/video-cover-1.jpg"
+                        aria-label="Um momento para guardar">
+                        <source src="../../Fotos-nossas/Encontro%20inesperado%20kkkkk/WhatsApp%20Video%202026-11-04%20at%2008.52.20.mp4" type="video/mp4">
+                        Seu navegador não consegue reproduzir este vídeo.
+                    </video>
+                    <h2 class="video-card-title">Um momento para guardar</h2>
+                    <p class="video-card-meta">Encontro inesperado · 01 nov. 2026</p>
+                </article>
+                <article class="video-card" data-video-category="encontro">
+                    <video
+                        class="video-card-player"
+                        controls
+                        playsinline
+                        preload="none"
+                        poster="../../Fotos-nossas/Encontro%20inesperado%20kkkkk/video-cover-2.jpg"
+                        aria-label="Mais uma lembrança desse dia">
+                        <source src="../../Fotos-nossas/Encontro%20inesperado%20kkkkk/WhatsApp%20Video%202026-11-04%20at%2008.52.20%20(1).mp4" type="video/mp4">
+                        Seu navegador não consegue reproduzir este vídeo.
+                    </video>
+                    <h2 class="video-card-title">Mais uma lembrança desse dia</h2>
+                    <p class="video-card-meta">Encontro inesperado · 01 nov. 2026</p>
+                </article>
+                <article class="video-card" data-video-category="encontro">
+                    <video
+                        class="video-card-player"
+                        controls
+                        playsinline
+                        preload="none"
+                        poster="../../Fotos-nossas/Encontro%20inesperado%20kkkkk/video-cover-3.jpg"
+                        aria-label="Um instante do nosso encontro">
+                        <source src="../../Fotos-nossas/Encontro%20inesperado%20kkkkk/WhatsApp%20Video%202026-11-04%20at%2008.52.21.mp4" type="video/mp4">
+                        Seu navegador não consegue reproduzir este vídeo.
+                    </video>
+                    <h2 class="video-card-title">Um instante do nosso encontro</h2>
+                    <p class="video-card-meta">Encontro inesperado · 01 nov. 2026</p>
+                </article>
+                <p class="video-empty-state" hidden>Nenhum vídeo encontrado. Tente outra pesquisa.</p>
+            </div>
+        </section>
+    </main>
+    <script>
+        const searchForm = document.querySelector(".video-search");
+        const searchInput = document.querySelector("#video-search-input");
+        const filterButtons = [...document.querySelectorAll(".video-filter")];
+        const videoCards = [...document.querySelectorAll(".video-card")];
+        const resultCount = document.querySelector("#video-result-count");
+        const emptyState = document.querySelector(".video-empty-state");
+        let activeFilter = "all";
+
+        const filterVideos = () => {
+            const query = searchInput.value.trim().toLocaleLowerCase("pt-BR");
+            let visibleCount = 0;
+
+            videoCards.forEach((card) => {
+                const matchesQuery = card.textContent.toLocaleLowerCase("pt-BR").includes(query);
+                const matchesFilter = activeFilter === "all" || card.dataset.videoCategory === activeFilter;
+                const visible = matchesQuery && matchesFilter;
+                card.hidden = !visible;
+                if (visible) visibleCount += 1;
+            });
+
+            resultCount.textContent = String(visibleCount);
+            emptyState.hidden = visibleCount > 0;
+        };
+
+        searchForm.addEventListener("submit", (event) => {
+            event.preventDefault();
+            filterVideos();
+        });
+
+        searchInput.addEventListener("input", filterVideos);
+
+        filterButtons.forEach((button) => {
+            button.addEventListener("click", () => {
+                activeFilter = button.dataset.videoFilter;
+                filterButtons.forEach((filterButton) => {
+                    filterButton.setAttribute("aria-pressed", String(filterButton === button));
+                });
+                filterVideos();
+            });
+        });
+
+    </script>
+    <script src="../../assets/js/brand-doodles.js" defer></script>
+</body>
+</html>

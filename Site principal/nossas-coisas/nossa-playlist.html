@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nossa playlist | Projeto Letícia</title>
+    <link rel="stylesheet" href="../../assets/css/InterfaceProjeto-Leticia.css">
+    <link rel="stylesheet" href="../../assets/css/menu-romantico.css">
+    <link rel="stylesheet" href="nossas-memorias.css">
+    <link rel="stylesheet" href="spotify-music.css">
+    <script src="music-cursor.js" defer></script>
+    <script src="../../assets/js/menu-romantico.js" defer></script>
+    <script src="../../assets/js/brand-doodles.js" defer></script>
+    <link rel="stylesheet" href="../../assets/css/progresso-site.css">
+    <script src="../../assets/js/progresso-site.js" defer></script>
+    <link rel="stylesheet" href="../../assets/css/identidade-visual.css">
+</head>
+<body class="ornamento-lirios spotify-music-body">
+    <nav class="menu-romantico" aria-label="Navegação desta seção">
+        <span class="indicador" aria-hidden="true"></span>
+        <div class="menu-item"><a href="Botoes.html" data-voltar>Voltar ao menu</a></div>
+        <div class="menu-item"><a href="nossas-memorias.html">Nossas memórias</a></div>
+    </nav>
+
+    <main class="memories-page playlist-page">
+        <header class="memories-intro">
+            <p class="memories-eyebrow">Canções para acompanhar a nossa história</p>
+            <h1>Nossa playlist</h1>
+            <p>Algumas músicas que combinam com o carinho, os sonhos e os momentos que estamos construindo juntos.</p>
+        </header>
+
+        <section class="memory-section" aria-labelledby="playlist-title">
+            <h2 id="playlist-title">Dê o play e curta</h2>
+            <ol class="playlist">
+                <li class="playlist-track">
+                    <div>
+                        <h3>Me namora</h3>
+                        <p class="track-artist">Edu Ribeiro &amp; Banda Cativeiro</p>
+                        <p>Uma declaração leve e divertida, para lembrar o começo de uma aproximação que foi ficando cada vez mais especial.</p>
+                    </div>
+                    <audio controls preload="none" aria-label="Tocar Me namora, de Edu Ribeiro e Banda Cativeiro" data-playlist-audio>
+                        <source src="../../Musicas%20dedicada%20a%20leticia%20no%20site/Me%20namora/Edu%20Ribeiro%20%26%20Banda%20Cativeiro%20-%20Me%20namora.mp3" type="audio/mpeg">
+                    </audio>
+                </li>
+                <li class="playlist-track">
+                    <div>
+                        <h3>Superpowers</h3>
+                        <p class="track-artist">Daniel Caesar</p>
+                        <p>Uma canção para celebrar a admiração e o jeito especial que alguém pode trazer mais brilho aos nossos dias.</p>
+                    </div>
+                    <audio controls preload="none" aria-label="Tocar Superpowers, de Daniel Caesar" data-playlist-audio>
+                        <source src="../../Musicas%20dedicada%20a%20leticia%20no%20site/Superpowers-Daniel%20Caesar/Daniel%20Caesar%20-%20Superpowers%20(Official%20Audio).mp3" type="audio/mpeg">
+                    </audio>
+                </li>
+                <li class="playlist-track">
+                    <div>
+                        <h3>Chuva de arroz</h3>
+                        <p class="track-artist">Luan Santana</p>
+                        <p>Uma música romântica para sonhar com momentos felizes e com tudo de bonito que ainda podemos viver.</p>
+                    </div>
+                    <audio controls preload="none" aria-label="Tocar Chuva de arroz, de Luan Santana" data-playlist-audio>
+                        <source src="Luan%20Santana%20-%20Chuva%20de%20arroz%20(DVD%20Luan%20Santana%20Ac%C3%BAstico)(MP3_160K).mp3" type="audio/mpeg">
+                    </audio>
+                </li>
+                <li class="playlist-track">
+                    <div>
+                        <h3>Contrato</h3>
+                        <p class="track-artist">Jorge &amp; Mateus</p>
+                        <p>Uma escolha para lembrar que carinho também está nas promessas simples de cuidar um do outro e seguir lado a lado.</p>
+                    </div>
+                    <audio controls preload="none" aria-label="Tocar Contrato, de Jorge e Mateus" data-playlist-audio>
+                        <source src="../../Musicas%20dedicada%20a%20leticia%20no%20site/contrato-Jorge%20e%20Mateus/Jorge%20%26%20Mateus%20-%20Contrato%20(Lyric%20V%C3%ADdeo%20Oficial).mp3" type="audio/mpeg">
+                    </audio>
+                </li>
+            </ol>
+            <p class="playlist-status" role="status" aria-live="polite"></p>
+        </section>
+    </main>
+
+    <script>
+        const playlistPlayers = [...document.querySelectorAll("[data-playlist-audio]")];
+        const playlistStatus = document.querySelector(".playlist-status");
+
+        playlistPlayers.forEach((player) => {
+            player.addEventListener("play", () => {
+                playlistPlayers.forEach((otherPlayer) => {
+                    if (otherPlayer !== player) {
+                        otherPlayer.pause();
+                    }
+                });
+                playlistStatus.textContent = "";
+            });
+
+            player.addEventListener("error", () => {
+                playlistStatus.textContent = "Não foi possível carregar uma das músicas. Verifique se o arquivo está disponível.";
+            });
+        });
+    </script>
+</body>
+</html>

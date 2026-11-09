@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Botão que some</title>
+</head>
+<body class="botaoquesome"></body>
+    
+        <div>
+            <p>pergunta?</p>
+            <div class="d-flex justify-content-around">
+                <button id="yes" class="btn btn-light"
+                onclick="window.location.href='alguma pasta'">
+                sim
+                </button>
+                <button id="no" class="btn btn-light">
+                    Não
+                </button>
+            </div>
+
+        </div>
+    <script>
+
+        document.querySelector("#no").addEventListener("mouseover",function() {
+            
+          let h = window.innerHeight - 50;
+          let w = window.innerWidth - 50;
+          this.style.position = "absolute"
+          this.style.top = Math.random() * h + "px"
+          this.style.left = Math.random() * w + "px"
+            
+        })
+
+    </script>
+</body>
+</html>

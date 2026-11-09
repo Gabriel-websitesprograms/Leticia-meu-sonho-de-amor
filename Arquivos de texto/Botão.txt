@@ -1,0 +1,23 @@
+.Botao-personagem {
+    width: 90%;
+    max-width: 700px;
+    margin: 20px auto 0;
+    display: flex;
+    justify-content: flex-end;
+}
+
+.Botao-personagem a {
+    display: inline-block;
+    padding: 10px 16px;
+    border: 2px solid #B08D57;
+    border-radius: 8px;
+    background-color: #2A1720;
+    color: #E6C27A;
+    text-decoration: none;
+    font-family: 'MedievalSharp', Georgia, serif;
+}
+
+.Botao-personagem a:hover,
+.Botao-personagem a:focus-visible {
+    color: #F3E9DC;
+}

@@ -1,0 +1,727 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../../assets/css/InterfaceProjeto-Leticia.css">
+    <link rel="stylesheet" href="../../assets/css/progresso-site.css">
+    <script src="../../assets/js/cursor-romantico.js" defer></script>
+    <script src="../../assets/js/progresso-site.js" defer></script>
+    <title>Menu</title>
+    <link rel="stylesheet" href="../../assets/css/menu-romantico.css">
+    <script src="../../assets/js/menu-romantico.js" defer></script>
+    <style>
+        .menu-page .menu-romantico {
+            position: relative;
+            display: grid;
+            grid-template-columns: repeat(3, minmax(0, 1fr));
+            gap: 0.65rem;
+            width: min(58rem, calc(100% - 2rem));
+            max-width: none;
+            margin: 2rem auto 0;
+            padding: 5.2rem 1rem 1rem;
+            overflow: hidden;
+            border: 1px solid rgb(181 150 91 / 48%);
+            border-radius: 1.8rem;
+            background:
+                radial-gradient(ellipse at 12% 0%, rgb(255 255 255 / 90%), transparent 48%),
+                linear-gradient(145deg, #fffaf5, #fff0f3 58%, #fbf3e8);
+            box-shadow: 0 20px 55px rgb(75 44 57 / 13%), inset 0 1px rgb(255 255 255 / 90%);
+        }
+
+        .menu-page .menu-romantico::before,
+        .menu-page .menu-romantico::after {
+            position: absolute;
+            left: 1.5rem;
+            pointer-events: none;
+        }
+
+        .menu-page .menu-romantico::before {
+            top: 1.1rem;
+            color: #8c4b62;
+            content: "NOSSO ROTEIRO";
+            font: 700 0.68rem/1.2 Arial, sans-serif;
+            letter-spacing: 0.2em;
+        }
+
+        .menu-page .menu-romantico::after {
+            top: 2rem;
+            color: #806b70;
+            content: "Uma história, capítulo por capítulo";
+            font: 0.9rem/1.4 Georgia, "Times New Roman", serif;
+        }
+
+        .menu-page .menu-romantico .menu-item {
+            z-index: 2;
+            display: flex;
+            min-width: 0;
+            min-height: 3.65rem;
+            align-items: stretch;
+        }
+
+        .menu-page .menu-romantico a,
+        .menu-page .menu-romantico .menu-trigger,
+        .menu-page .menu-romantico .chapter-locked-label {
+            width: 100%;
+            min-width: 0;
+            min-height: 3.65rem;
+            justify-content: flex-start;
+            gap: 0.65rem;
+            margin: 0;
+            padding: 0.65rem 0.8rem;
+            border: 1px solid rgb(132 85 101 / 17%);
+            border-radius: 1rem;
+            background: rgb(255 255 255 / 65%);
+            box-shadow: 0 4px 12px rgb(75 44 57 / 5%);
+            color: #633b4d;
+            font: 600 0.9rem/1.25 Arial, sans-serif;
+            text-align: left;
+            white-space: normal;
+            transition: color 220ms ease, border-color 220ms ease, background 220ms ease, transform 220ms ease;
+        }
+
+        .menu-page .menu-romantico a:hover,
+        .menu-page .menu-romantico a:focus-visible,
+        .menu-page .menu-romantico .menu-trigger:hover,
+        .menu-page .menu-romantico .menu-trigger:focus-visible {
+            transform: translateY(-2px);
+        }
+
+        .menu-page .menu-romantico .menu-roteiro-numero,
+        .menu-page .menu-romantico .chapter-locked-label .menu-roteiro-numero {
+            flex: 0 0 1.8rem;
+            width: 1.8rem;
+            height: 1.8rem;
+            margin: 0;
+            border-color: rgb(156 73 103 / 25%);
+            background: #fffaf7;
+            color: #87475e;
+            font-size: 0.67rem;
+        }
+
+        .menu-page .menu-romantico .menu-item.is-active > a,
+        .menu-page .menu-romantico .menu-item.is-active > .menu-trigger {
+            border-color: transparent;
+            background: transparent;
+            color: #fff;
+            box-shadow: none;
+        }
+
+        .menu-page .menu-romantico .menu-item.is-active .menu-roteiro-numero {
+            border-color: rgb(255 255 255 / 60%);
+            background: rgb(255 255 255 / 17%);
+            color: #fff;
+        }
+
+        .menu-page .menu-romantico .indicador {
+            top: 5.2rem;
+            left: 1rem;
+            z-index: 1;
+            height: 3.65rem;
+            border-radius: 1rem;
+            background: linear-gradient(135deg, #a05270, #78374f);
+            box-shadow: 0 8px 18px rgb(120 55 79 / 23%);
+            transition: top 420ms cubic-bezier(.2,.8,.2,1), left 420ms cubic-bezier(.2,.8,.2,1), width 420ms cubic-bezier(.2,.8,.2,1), height 420ms cubic-bezier(.2,.8,.2,1), opacity 180ms ease;
+        }
+
+        .menu-page .menu-romantico .chapter-locked-label {
+            position: relative;
+            display: flex;
+            cursor: not-allowed;
+            color: #897a7c;
+        }
+
+        .menu-page .menu-romantico .chapter-locked-label .chapter-locked-icon {
+            top: 50%;
+            right: 0.75rem;
+            left: auto;
+            display: grid;
+            width: 1.45rem;
+            height: 1.45rem;
+            place-items: center;
+            border: 1px solid rgb(181 150 91 / 48%);
+            border-radius: 50%;
+            background: #fffaf7;
+            box-shadow: none;
+            font-size: 0.72rem;
+            opacity: 1;
+            pointer-events: none;
+            transform: translateY(-50%);
+        }
+
+        .menu-page .menu-romantico .chapter-locked-label .menu-roteiro-numero {
+            opacity: 0.72;
+        }
+
+        .menu-page .menu-romantico .menu-item:nth-of-type(2) { animation-delay: 40ms; }
+        .menu-page .menu-romantico .menu-item:nth-of-type(3) { animation-delay: 80ms; }
+        .menu-page .menu-romantico .menu-item:nth-of-type(4) { animation-delay: 120ms; }
+        .menu-page .menu-romantico .menu-item:nth-of-type(5) { animation-delay: 160ms; }
+        .menu-page .menu-romantico .menu-item:nth-of-type(6) { animation-delay: 200ms; }
+        .menu-page .menu-romantico .menu-item:nth-of-type(7) { animation-delay: 240ms; }
+        .menu-page .menu-romantico .menu-item:nth-of-type(8) { animation-delay: 280ms; }
+        .menu-page .menu-romantico .menu-item:nth-of-type(9) { animation-delay: 320ms; }
+        .menu-page .menu-romantico .menu-item:nth-of-type(10) { animation-delay: 360ms; }
+
+        @keyframes chapter-card-enter {
+            from { opacity: 0; transform: translateY(8px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .menu-page .menu-romantico .menu-item {
+            animation: chapter-card-enter 500ms both;
+        }
+
+        @media (max-width: 700px) {
+            .menu-page .menu-romantico {
+                grid-template-columns: repeat(2, minmax(0, 1fr));
+                gap: 0.5rem;
+                width: calc(100% - 1.25rem);
+                margin-top: 1rem;
+                padding: 4.8rem 0.65rem 0.65rem;
+                border-radius: 1.35rem;
+            }
+
+            .menu-page .menu-romantico::before,
+            .menu-page .menu-romantico::after {
+                left: 1.1rem;
+            }
+
+            .menu-page .menu-romantico .menu-item,
+            .menu-page .menu-romantico a,
+            .menu-page .menu-romantico .menu-trigger,
+            .menu-page .menu-romantico .chapter-locked-label {
+                min-height: 3.4rem;
+            }
+
+            .menu-page .menu-romantico .indicador {
+                top: 4.8rem;
+                left: 0.65rem;
+                height: 3.4rem;
+            }
+
+            .menu-page .menu-romantico a,
+            .menu-page .menu-romantico .menu-trigger,
+            .menu-page .menu-romantico .chapter-locked-label {
+                gap: 0.45rem;
+                padding: 0.55rem 0.6rem;
+                font-size: 0.78rem;
+            }
+
+            .menu-page .menu-romantico .menu-item.is-active > a,
+            .menu-page .menu-romantico .menu-item.is-active > .menu-trigger {
+                border-color: transparent;
+                background: linear-gradient(135deg, #a05270, #78374f);
+                color: #fff;
+                box-shadow: 0 6px 14px rgb(120 55 79 / 20%);
+            }
+
+            .menu-page .menu-romantico .menu-item.is-active .menu-roteiro-numero {
+                border-color: rgb(255 255 255 / 60%);
+                background: rgb(255 255 255 / 17%);
+                color: #fff;
+            }
+        }
+
+        @media (max-width: 360px) {
+            .menu-page .menu-romantico {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            .menu-page .menu-romantico .menu-item {
+                animation: none;
+            }
+
+            .menu-page .menu-romantico a,
+            .menu-page .menu-romantico .menu-trigger,
+            .menu-page .menu-romantico .chapter-locked-label,
+            .menu-page .menu-romantico .indicador {
+                transition: none;
+            }
+        }
+
+        .menu-page .menu-showcase {
+            min-height: 0;
+            padding: clamp(2.5rem, 6vw, 4.5rem) 1rem 3rem;
+        }
+
+        .menu-page .photo-frame {
+            position: relative;
+            isolation: isolate;
+            width: min(100%, 28rem);
+            margin: 0 auto;
+            padding: clamp(0.8rem, 2.4vw, 1.15rem);
+            overflow: hidden;
+            border: 1px solid rgb(181 150 91 / 58%);
+            border-radius: 1.6rem;
+            background:
+                radial-gradient(ellipse at 0 0, rgb(255 255 255 / 90%), transparent 42%),
+                linear-gradient(145deg, #fffdf9, #f8edf0 55%, #f5ebdc);
+            box-shadow:
+                0 0 0 5px rgb(181 150 91 / 15%),
+                0 24px 64px rgb(61 41 50 / 18%),
+                inset 0 1px rgb(255 255 255 / 92%);
+        }
+
+        .menu-page .photo-frame::before,
+        .menu-page .photo-frame::after {
+            position: absolute;
+            z-index: -1;
+            width: clamp(4.5rem, 14vw, 7rem);
+            aspect-ratio: 736 / 1308;
+            background: url("../../imagens/flor-de-cerejeira-bordas.png") center / contain no-repeat;
+            content: "";
+            opacity: 0.72;
+            pointer-events: none;
+        }
+
+        .menu-page .photo-frame::before {
+            top: -1.5rem;
+            left: -1.25rem;
+            transform: rotate(-24deg);
+        }
+
+        .menu-page .photo-frame::after {
+            right: -1.25rem;
+            bottom: -1.5rem;
+            transform: rotate(156deg);
+        }
+
+        .photo-frame-header,
+        .photo-frame-caption,
+        .photo-frame-toolbar {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .photo-frame-header {
+            gap: 1rem;
+            padding: 0.15rem 0.2rem 0.8rem;
+            color: #806b70;
+            font-size: 0.66rem;
+            font-weight: 700;
+            letter-spacing: 0.18em;
+            text-transform: uppercase;
+        }
+
+        .photo-frame-heading {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.55rem;
+            margin: 0;
+            color: #78374f;
+        }
+
+        .photo-frame-heading::before {
+            width: 0.52rem;
+            height: 0.52rem;
+            border-radius: 50%;
+            background: #b5965b;
+            box-shadow: 0 0 0 4px rgb(181 150 91 / 14%);
+            content: "";
+        }
+
+        .photo-frame-count {
+            flex: 0 0 auto;
+            color: #9c4967;
+            font-variant-numeric: tabular-nums;
+            letter-spacing: 0.12em;
+        }
+
+        .photo-frame-mat {
+            padding: clamp(0.45rem, 1.5vw, 0.7rem);
+            border: 1px solid rgb(181 150 91 / 55%);
+            border-radius: 1.05rem;
+            background: #fffdf9;
+            box-shadow: inset 0 0 0 1px rgb(181 150 91 / 12%), 0 8px 24px rgb(61 41 50 / 8%);
+        }
+
+        .menu-page .menu-photo-carousel {
+            position: relative;
+            width: 100%;
+            aspect-ratio: 4 / 5;
+            overflow: hidden;
+            border: 0;
+            border-radius: 0.72rem;
+            background:
+                radial-gradient(ellipse at 50% 35%, rgb(255 255 255 / 10%), transparent 60%),
+                #281d23;
+            box-shadow: 0 12px 30px rgb(40 29 35 / 20%);
+        }
+
+        .photo-frame[hidden] {
+            display: none;
+        }
+
+        .menu-page .menu-photo-carousel img {
+            position: absolute;
+            inset: 0;
+            display: block;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            opacity: 0;
+            transform: scale(1.055);
+            transition: opacity 750ms ease, transform 1800ms cubic-bezier(.2,.65,.25,1);
+        }
+
+        .menu-page .menu-photo-carousel img.is-active {
+            opacity: 1;
+            transform: scale(1);
+        }
+
+        .photo-carousel-control {
+            position: absolute;
+            z-index: 2;
+            top: 50%;
+            display: grid;
+            width: clamp(2.45rem, 7vw, 3.2rem);
+            aspect-ratio: 1;
+            place-items: center;
+            border: 1px solid rgb(255 255 255 / 68%);
+            border-radius: 50%;
+            background: rgb(255 250 247 / 86%);
+            box-shadow: 0 5px 18px rgb(32 20 25 / 25%);
+            color: #78374f;
+            font: 1.7rem/1 Georgia, "Times New Roman", serif;
+            cursor: pointer;
+            opacity: 0;
+            transform: translateY(-50%) scale(0.92);
+            transition: opacity 200ms ease, transform 200ms ease, background 200ms ease;
+            backdrop-filter: blur(8px);
+        }
+
+        .photo-frame:hover .photo-carousel-control,
+        .photo-frame:focus-within .photo-carousel-control {
+            opacity: 1;
+            transform: translateY(-50%) scale(1);
+        }
+
+        .photo-carousel-control:hover,
+        .photo-carousel-control:focus-visible {
+            background: #fff;
+        }
+
+        .photo-carousel-control:focus-visible,
+        .photo-carousel-dot:focus-visible,
+        .photo-carousel-play:focus-visible {
+            outline: 2px solid #b5965b;
+            outline-offset: 3px;
+        }
+
+        .photo-carousel-previous { left: 0.85rem; }
+        .photo-carousel-next { right: 0.85rem; }
+
+        .photo-frame-caption {
+            min-height: 3.6rem;
+            gap: 1rem;
+            padding: 0.8rem 0.15rem 0.3rem;
+        }
+
+        .photo-frame-caption p {
+            margin: 0;
+            color: #633b4d;
+            font: 500 clamp(0.95rem, 2.2vw, 1.12rem)/1.4 Georgia, "Times New Roman", serif;
+            text-align: left;
+        }
+
+        .photo-frame-toolbar {
+            gap: 1rem;
+            min-height: 2.4rem;
+            padding-top: 0.55rem;
+            border-top: 1px solid rgb(181 150 91 / 25%);
+        }
+
+        .photo-carousel-dots {
+            display: flex;
+            min-width: 0;
+            flex-wrap: wrap;
+            align-items: center;
+            justify-content: center;
+            gap: 0.42rem;
+        }
+
+        .photo-carousel-dot {
+            width: 0.48rem;
+            height: 0.48rem;
+            padding: 0;
+            border: 0;
+            border-radius: 99px;
+            background: #ddcbd0;
+            cursor: pointer;
+            transition: width 240ms ease, background 240ms ease, transform 240ms ease;
+        }
+
+        .photo-carousel-dot[aria-current="true"] {
+            width: 1.35rem;
+            background: #9c4967;
+        }
+
+        .photo-carousel-dot:hover {
+            transform: scale(1.18);
+        }
+
+        .photo-carousel-play {
+            display: inline-flex;
+            flex: 0 0 auto;
+            align-items: center;
+            gap: 0.4rem;
+            padding: 0.4rem 0.6rem;
+            border: 1px solid rgb(156 73 103 / 24%);
+            border-radius: 99px;
+            background: rgb(255 255 255 / 66%);
+            color: #78374f;
+            font: 700 0.68rem/1 Arial, sans-serif;
+            cursor: pointer;
+        }
+
+        .photo-carousel-play:hover {
+            background: #fff;
+        }
+
+        .photo-frame-progress {
+            height: 2px;
+            overflow: hidden;
+            border-radius: 99px;
+            background: rgb(181 150 91 / 18%);
+        }
+
+        .photo-frame-progress span {
+            display: block;
+            width: 0;
+            height: 100%;
+            background: linear-gradient(90deg, #c9a96b, #9c4967);
+            transition: width 450ms ease;
+        }
+
+        @media (hover: none) {
+            .photo-carousel-control {
+                opacity: 1;
+                transform: translateY(-50%);
+            }
+        }
+
+        @media (max-width: 600px) {
+            .menu-page .menu-showcase {
+                padding: 2.5rem 0.75rem 2rem;
+            }
+
+            .menu-page .photo-frame {
+                width: min(100%, 28rem);
+                border-radius: 1.2rem;
+            }
+
+            .menu-page .menu-photo-carousel {
+                aspect-ratio: 3 / 4;
+            }
+
+            .photo-frame-header {
+                font-size: 0.59rem;
+            }
+
+            .photo-carousel-control {
+                opacity: 1;
+                background: rgb(255 250 247 / 78%);
+            }
+
+            .photo-carousel-previous { left: 0.55rem; }
+            .photo-carousel-next { right: 0.55rem; }
+
+            .photo-frame-caption {
+                min-height: 3.25rem;
+            }
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            .menu-page .menu-photo-carousel img,
+            .photo-carousel-control,
+            .photo-carousel-dot,
+            .photo-frame-progress span {
+                transition: none;
+            }
+
+            .menu-page .menu-photo-carousel img.is-active {
+                transform: none;
+            }
+        }
+    </style>
+    <link rel="stylesheet" href="../../assets/css/brand-doodles.css">
+    <link rel="stylesheet" href="../../assets/css/identidade-visual.css">
+</head>
+<body class="ornamento-folhas menu-page">
+    <nav class="menu-romantico" aria-label="Navegação pelas seções">
+        <span class="indicador" aria-hidden="true"></span>
+        <div class="menu-item" data-chapter-index="1">
+            <a href="../historia/NossaHistoria.html?tocarMusica=sim"><span class="menu-roteiro-numero" aria-hidden="true">01</span>Nossa história</a>
+        </div>
+        <div class="menu-item" data-chapter-index="2">
+            <a href="constelacao.html"><span class="menu-roteiro-numero" aria-hidden="true">02</span>Nossa Constelação</a>
+        </div>
+        <div class="menu-item" data-chapter-index="3">
+            <a href="../datas/27%20de%20agosto%20de%202026.html"><span class="menu-roteiro-numero" aria-hidden="true">03</span>Datas</a>
+        </div>
+        <div class="menu-item" data-chapter-index="4">
+            <a href="Fotos.html"><span class="menu-roteiro-numero" aria-hidden="true">04</span>Nossas coisas</a>
+        </div>
+        <div class="menu-item" data-chapter-index="5">
+            <a href="viagens.html"><span class="menu-roteiro-numero" aria-hidden="true">05</span>Viagens dos nossos sonhos</a>
+        </div>
+        <div class="menu-item" data-chapter-index="6">
+            <a href="paises-para-viajar.html"><span class="menu-roteiro-numero" aria-hidden="true">06</span>Agência de viagens</a>
+        </div>
+        <div class="menu-item" data-chapter-index="7">
+            <a href="nossas-memorias.html"><span class="menu-roteiro-numero" aria-hidden="true">07</span>Nossas memórias</a>
+        </div>
+        <div class="menu-item" data-chapter-index="8">
+            <a href="Suas%20series%20favoritos.html"><span class="menu-roteiro-numero" aria-hidden="true">08</span>Suas coisas favoritas</a>
+        </div>
+        <div class="menu-item" data-chapter-index="9">
+            <a href="Musicas%20dedicadas.html"><span class="menu-roteiro-numero" aria-hidden="true">09</span>Dedico a você</a>
+        </div>
+        <div class="menu-item" data-chapter-index="10">
+            <a class="menu-misterio" href="../../Pedido-de-namoro.html" aria-label="Um Pedido especial. Deixe para abrir por último."><span class="menu-roteiro-numero" aria-hidden="true">10</span>💌 Um Pedido</a>
+        </div>
+    </nav>
+    <main class="menu-showcase">
+        <figure class="photo-frame" hidden aria-label="Slideshow de fotos do casal">
+            <header class="photo-frame-header">
+                <p class="photo-frame-heading">Nosso álbum</p>
+                <span class="photo-frame-count" aria-live="polite">01 / 10</span>
+            </header>
+            <div class="photo-frame-mat">
+                <div class="menu-photo-carousel" role="region" aria-label="Fotos do casal" aria-live="off" tabindex="0">
+                <img class="is-active" src="../../Fotos-nossas/Foto-1.jpeg" alt="Um momento especial nosso" fetchpriority="high">
+                <img src="../../Fotos-nossas/WhatsApp%20Image%202026-10-10%20at%2016.46.03.jpeg" alt="Nós juntos em 10 de outubro" aria-hidden="true">
+                <img src="../../Fotos-nossas/WhatsApp%20Image%202026-10-10%20at%2016.46.03%20(1).jpeg" alt="Uma lembrança do nosso encontro" aria-hidden="true">
+                <img src="../../Fotos-nossas/WhatsApp%20Image%202026-10-10%20at%2016.46.03%20(2).jpeg" alt="Nós juntos em um momento especial" aria-hidden="true">
+                <img src="../../Fotos-nossas/WhatsApp%20Image%202026-10-10%20at%2016.46.03%20(3).jpeg" alt="Uma foto nossa de 10 de outubro" aria-hidden="true">
+                <img src="../../Fotos-nossas/WhatsApp%20Image%202026-10-10%20at%2016.46.03%20(4).jpeg" alt="Mais uma lembrança do nosso encontro" aria-hidden="true">
+                <img src="../../Fotos-nossas/WhatsApp%20Image%202026-10-10%20at%2017.31.16.jpeg" alt="Nós juntos em 10 de outubro" aria-hidden="true">
+                <img src="../../Fotos-nossas/WhatsApp%20Image%202026-10-10%20at%2017.35.26.jpeg" alt="Uma foto nossa de 10 de outubro" aria-hidden="true">
+                <img src="../../Fotos-nossas/WhatsApp%20Image%202026-10-10%20at%2017.35.27.jpeg" alt="Mais uma foto nossa de 10 de outubro" aria-hidden="true">
+                <img src="../../Fotos-nossas/foto-menu-principal.png" alt="Foto do casal" aria-hidden="true">
+                    <button class="photo-carousel-control photo-carousel-previous" type="button" aria-label="Foto anterior">‹</button>
+                    <button class="photo-carousel-control photo-carousel-next" type="button" aria-label="Próxima foto">›</button>
+                </div>
+            </div>
+            <figcaption class="photo-frame-caption">
+                <p aria-live="polite">Um momento especial nosso</p>
+            </figcaption>
+            <div class="photo-frame-toolbar">
+                <div class="photo-carousel-dots" role="group" aria-label="Selecionar uma foto"></div>
+                <button class="photo-carousel-play" type="button" aria-pressed="true" aria-label="Pausar apresentação">Ⅱ <span>Pausar</span></button>
+            </div>
+            <div class="photo-frame-progress" aria-hidden="true"><span></span></div>
+        </figure>
+    </main>
+    <script>
+        const fotosDoMenu = [...document.querySelectorAll(".menu-photo-carousel img")];
+        const carrosselFotos = document.querySelector(".menu-photo-carousel");
+        const quadroFotos = document.querySelector(".photo-frame");
+        const contadorFotos = document.querySelector(".photo-frame-count");
+        const legendaFoto = document.querySelector(".photo-frame-caption p");
+        const pontosFotos = document.querySelector(".photo-carousel-dots");
+        const progressoFotos = document.querySelector(".photo-frame-progress span");
+        const botaoApresentacao = document.querySelector(".photo-carousel-play");
+        const botaoFotoAnterior = document.querySelector(".photo-carousel-previous");
+        const botaoProximaFoto = document.querySelector(".photo-carousel-next");
+        const intervaloApresentacao = 4200;
+        const embaralharFotos = (fotos) => {
+            for (let index = fotos.length - 1; index > 0; index -= 1) {
+                const randomIndex = Math.floor(Math.random() * (index + 1));
+                [fotos[index], fotos[randomIndex]] = [fotos[randomIndex], fotos[index]];
+            }
+            return fotos;
+        };
+        let ordemDasFotos = embaralharFotos(fotosDoMenu);
+        let fotoAtiva = 0;
+        let apresentacaoAtiva = true;
+        let temporizadorApresentacao;
+
+        const atualizarApresentacaoFotos = () => {
+            const foto = ordemDasFotos[fotoAtiva];
+            const numeroFoto = String(fotoAtiva + 1).padStart(2, "0");
+            const totalFotos = String(ordemDasFotos.length).padStart(2, "0");
+
+            fotosDoMenu.forEach((imagem) => {
+                const ativa = imagem === foto;
+                imagem.classList.toggle("is-active", ativa);
+                imagem.toggleAttribute("aria-hidden", !ativa);
+            });
+            [...pontosFotos.children].forEach((ponto, index) => {
+                ponto.setAttribute("aria-current", String(index === fotoAtiva));
+            });
+            contadorFotos.textContent = `${numeroFoto} / ${totalFotos}`;
+            legendaFoto.textContent = foto.alt;
+            progressoFotos.style.width = `${((fotoAtiva + 1) / ordemDasFotos.length) * 100}%`;
+            botaoApresentacao.setAttribute("aria-pressed", String(apresentacaoAtiva));
+            botaoApresentacao.setAttribute(
+                "aria-label",
+                apresentacaoAtiva ? "Pausar apresentação" : "Iniciar apresentação"
+            );
+            botaoApresentacao.querySelector("span").textContent = apresentacaoAtiva
+                ? "Pausar"
+                : "Reproduzir";
+            botaoApresentacao.firstChild.textContent = apresentacaoAtiva ? "Ⅱ " : "▶ ";
+        };
+
+        const pararTemporizadorApresentacao = () => {
+            window.clearInterval(temporizadorApresentacao);
+        };
+
+        const iniciarTemporizadorApresentacao = () => {
+            pararTemporizadorApresentacao();
+            if (
+                !apresentacaoAtiva
+                || window.matchMedia("(prefers-reduced-motion: reduce)").matches
+            ) {
+                return;
+            }
+            temporizadorApresentacao = window.setInterval(() => {
+                if (document.hidden || quadroFotos.hidden) return;
+                mostrarFoto(fotoAtiva + 1);
+            }, intervaloApresentacao);
+        };
+
+        const mostrarFoto = (index) => {
+            fotoAtiva = (index + ordemDasFotos.length) % ordemDasFotos.length;
+            atualizarApresentacaoFotos();
+            iniciarTemporizadorApresentacao();
+        };
+
+        ordemDasFotos.forEach((_, index) => {
+            const ponto = document.createElement("button");
+            ponto.className = "photo-carousel-dot";
+            ponto.type = "button";
+            ponto.setAttribute("aria-label", `Mostrar foto ${index + 1}`);
+            ponto.setAttribute("aria-current", String(index === fotoAtiva));
+            ponto.addEventListener("click", () => mostrarFoto(index));
+            pontosFotos.append(ponto);
+        });
+
+        botaoFotoAnterior.addEventListener("click", () => mostrarFoto(fotoAtiva - 1));
+        botaoProximaFoto.addEventListener("click", () => mostrarFoto(fotoAtiva + 1));
+        botaoApresentacao.addEventListener("click", () => {
+            apresentacaoAtiva = !apresentacaoAtiva;
+            atualizarApresentacaoFotos();
+            iniciarTemporizadorApresentacao();
+        });
+        carrosselFotos.addEventListener("keydown", (event) => {
+            if (event.key === "ArrowLeft") {
+                event.preventDefault();
+                mostrarFoto(fotoAtiva - 1);
+            } else if (event.key === "ArrowRight") {
+                event.preventDefault();
+                mostrarFoto(fotoAtiva + 1);
+            }
+        });
+        document.addEventListener("visibilitychange", iniciarTemporizadorApresentacao);
+        atualizarApresentacaoFotos();
+        iniciarTemporizadorApresentacao();
+    </script>
+    <script src="../../assets/js/brand-doodles.js" defer></script>
+</body>
+</html>

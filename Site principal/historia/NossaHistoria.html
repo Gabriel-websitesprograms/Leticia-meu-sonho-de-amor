@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../../assets/css/InterfaceProjeto-Leticia.css">
+    <script src="../../assets/js/cursor-romantico.js" defer></script>
+    <title>Nossa História</title>
+    <link rel="stylesheet" href="../../assets/css/menu-romantico.css">
+    <script src="../../assets/js/menu-romantico.js" defer></script>
+    <link rel="stylesheet" href="../../assets/css/brand-doodles.css">
+    <link rel="stylesheet" href="../../assets/css/progresso-site.css">
+    <script src="../../assets/js/progresso-site.js" defer></script>
+    <link rel="stylesheet" href="../../assets/css/identidade-visual.css">
+</head>
+<body class="ornamento-curvas historia-conectada">
+<nav class="menu-romantico" aria-label="Navegação desta seção">
+    <span class="indicador" aria-hidden="true"></span>
+    <div class="menu-item"><a href="../../index.html" data-voltar>Voltar à abertura</a></div>
+    <div class="menu-item">
+        <a id="abrir-datas-mensagens" href="../nossas-coisas/Botoes.html">Abrir datas e mensagens</a>
+    </div>
+</nav>
+    <main>
+        <section class="history-section" aria-labelledby="apresentacao">
+            <h1 id="apresentacao">Nossa história</h1>
+            <p class="p1">Nossa história começou em 08/08/2026, na formatura da minha mãe. Foi lá que você me viu pela primeira vez. Não tenho lembranças muito claras daquele dia, mas gosto de pensar que o destino já estava dando um jeitinho de cruzar nossos caminhos.</p>
+            <p class="p1">Depois daquele dia, não nos vimos mais e nem imaginávamos que voltaríamos a nos encontrar. Até que, em 26/08, uma conta diferente começou a me seguir. Confesso que fiquei na dúvida se aceitava ou não. Demorei um pouquinho, eu sei... Desculpa por isso, kkkkk. Ainda bem que aceitei!</p>
+            <p class="p1">Logo depois, vi uma postagem sua e não resisti: respondi com uma cantada improvisada sobre esse seu sorriso lindo, pelo qual sou completamente apaixonado. ❤️</p>
+            <p class="p1">Quem diria que aquela menina que me viu na formatura da minha mãe acabaria se tornando alguém tão especial para mim? Você apareceu de repente e, sem eu perceber, começou a fazer parte dos meus dias.</p>
+            <p class="p1">Hoje, já fico esperando seu bom-dia quando acordo e não quero terminar o dia sem receber seu boa-noite. Pode parecer simples, mas são esses pequenos detalhes que fazem você ser tão especial para mim.</p>
+            <p class="p1">Sei que estamos indo devagar e gosto de como as coisas estão acontecendo entre nós. Às vezes, fico pensando se estou fazendo tudo certinho porque, de verdade, não quero estragar o que estamos construindo.</p>
+            <p class="p1">Não sei o que vai acontecer daqui para a frente, mas quero continuar conhecendo você, fazendo você sorrir e vivendo muitos momentos ao seu lado.</p>
+            <p class="p1">E pensar que tudo começou com uma formatura, uma solicitação para seguir e uma cantada que, por sorte, deu certo, kkkkk. ❤️</p>
+            <p class="p1">Talvez tenha sido só uma coincidência; talvez a vida tenha dado um jeitinho de cruzar nossos caminhos. Mas, depois de tudo isso, começo a acreditar que você não apareceu na minha vida por acaso. E quem sabe, no fim das contas, você seja o <a class="destino-link" href="https://youtu.be/fziTdh7aELA?t=62&amp;is=m2kII6mUy3jZvPNQ" target="_blank" rel="noopener noreferrer">Meu destino</a>.</p>
+            <p class="p1">Desde então, você não sai da minha cabeça. Quero que saiba que pode contar comigo para o que der e vier.</p>
+            <p class="p1">Eu te amo, meu amor. Nossa primeira saída foi no dia <a class="historia-data-link" href="../datas/10deoutubrode2026.html">10 de outubro de 2026</a> — uma data que me lembra você, porque você é 10/10.</p>
+            <p class="p1">A cada sorriso seu, eu me apaixono um pouco mais. Amo quando seus olhos pequenos, cor de mel, olham para mim. Seus cabelos pretos lembram a escuridão da noite e têm um brilho mais bonito que o de uma noite de luar.</p>
+            <p class="p1">Eu te amo desde a primeira vez que nos vimos. Desde o instante em que você apareceu na minha vida, senti que era você: a dona dos meus sonhos, a mulher que sempre esperei.</p>
+            <p class="p1">Sou seu fã número 1 e espero acompanhar tudo o que a famosa da conta privada viver, gravar, editar e postar.</p>
+            <p class="p1">Cada vez que conversamos por telefone, sinto que nossa conexão não é qualquer coisa: ela é única. É como um bom vinho numa noite fria de filme, como o calor que aquece o verão e até como o frio de agosto — que fica melhor só de pensar em você.</p>
+            <p class="p1">Descobri o que é amar no toque dos seus beijos. Quando estou sozinho, acabo pensando em você; não há um dia em que isso não aconteça.</p>
+            <p class="p1">Nosso amor é sobrenatural. Viajei no seu olhar, no seu sorriso e nos seus segredos. O seu astral me encanta. ❤️</p>
+        </section>
+    </main>
+    <audio id="musica" src="../../Musicas%20dedicada%20a%20leticia%20no%20site/Superpowers-Daniel%20Caesar/Daniel%20Caesar%20-%20Superpowers%20(Official%20Audio).mp3" preload="auto"></audio>
+    <div class="music-controls" aria-label="Controles da música">
+        <button id="alternar-musica" type="button" aria-label="Pausar música">Pausar</button>
+        <label class="music-volume">
+            <span>Volume</span>
+            <input id="volume-musica" type="range" min="0" max="1" step="0.01" value="0.7" aria-label="Volume da música">
+        </label>
+        <span id="status-musica" class="music-status" aria-live="polite"></span>
+    </div>
+    <script>
+        const musica = document.querySelector("#musica");
+        const botaoMusica = document.querySelector("#alternar-musica");
+        const volumeMusica = document.querySelector("#volume-musica");
+        const statusMusica = document.querySelector("#status-musica");
+
+        const atualizarBotaoMusica = () => {
+            botaoMusica.textContent = musica.paused ? "Tocar" : "Pausar";
+            botaoMusica.setAttribute("aria-label", musica.paused ? "Tocar música" : "Pausar música");
+        };
+
+        musica.volume = Number(volumeMusica.value);
+        volumeMusica.addEventListener("input", () => {
+            musica.volume = Number(volumeMusica.value);
+        });
+
+        botaoMusica.addEventListener("click", () => {
+            if (musica.paused) {
+                musica.play().then(() => {
+                    statusMusica.textContent = "";
+                    atualizarBotaoMusica();
+                }).catch(() => {
+                    statusMusica.textContent = "Não foi possível reproduzir a música. Verifique o arquivo.";
+                });
+                return;
+            }
+
+            musica.pause();
+            statusMusica.textContent = "";
+            atualizarBotaoMusica();
+        });
+
+        musica.addEventListener("play", atualizarBotaoMusica);
+        musica.addEventListener("pause", atualizarBotaoMusica);
+        atualizarBotaoMusica();
+
+        document.querySelector("#abrir-datas-mensagens")?.addEventListener("click", () => {
+            musica.pause();
+            musica.currentTime = 0;
+        });
+
+        if (new URLSearchParams(window.location.search).get("tocarMusica") === "sim") {
+            musica.currentTime = 0;
+            musica.play().catch(() => {
+                statusMusica.textContent = "Use Tocar para iniciar a música.";
+            });
+        }
+    </script>
+    <script src="../../assets/js/brand-doodles.js" defer></script>
+</body>
+</html>

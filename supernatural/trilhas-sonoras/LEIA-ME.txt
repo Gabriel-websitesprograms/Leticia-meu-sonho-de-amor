@@ -1,0 +1,6 @@
+Coloque os arquivos de áudio desta série nesta pasta.
+
+Para adicionar uma faixa, edite trilha-sonora.js e inclua um item em trilhasSonoras:
+{ titulo: "Nome da faixa", arquivo: "trilhas-sonoras/nome-do-arquivo.mp3" }
+
+A página tentará tocar automaticamente a primeira faixa e não exibirá controles de reprodução. Alguns navegadores bloqueiam áudio automático com som; essa política não pode ser contornada pela página.

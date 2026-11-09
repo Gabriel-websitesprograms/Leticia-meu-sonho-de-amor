@@ -1,0 +1,10 @@
+Pronto. As datas agora ficam em ordem cronológica e em uma grade de quatro por linha em telas maiores. Quando você acrescentar uma quinta data, ela começará automaticamente uma segunda linha. Em telas menores, a grade se adapta: duas colunas em telas estreitas e uma coluna em celulares muito estreitos.
+
+Alterei a regra .navigation-list em InterfaceProjeto-Leticia.css. Ela usa CSS Grid: repeat(4, minmax(0, 1fr)) cria quatro colunas de largura igual; o gap define o espaço entre elas. Também configurei os links para preencher cada espaço da grade.
+
+Para adicionar uma data:
+
+Crie o arquivo HTML da nova data.
+Na lista <ul class="navigation-list"> da página inicial, acrescente um item <li><a href="arquivo-da-data.html">Data por extenso</a></li>.
+Coloque o novo item na posição cronológica correta. A grade preserva a ordem em que os itens aparecem no HTML; ela não ordena as datas automaticamente.
+Verifiquei que os quatro links atuais estão em ordem e que as regras de quatro, duas e uma coluna estão configuradas.

@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Coisas que quero viver com você | Projeto Letícia</title>
+    <link rel="stylesheet" href="../assets/css/InterfaceProjeto-Leticia.css">
+    <link rel="stylesheet" href="../Site%20principal/nossas-coisas/nossas-memorias.css">
+    <script src="../assets/js/cursor-romantico.js" defer></script>
+    <script src="../assets/js/brand-doodles.js" defer></script>
+    <link rel="stylesheet" href="../assets/css/identidade-visual.css">
+</head>
+<body class="ornamento-rosas">
+    <main class="memories-page">
+        <header class="memories-intro">
+            <p class="memories-eyebrow">Planos para o nosso futuro</p>
+            <h1>Coisas que quero viver com você</h1>
+            <p>Marque as ideias que vocês já realizaram. Suas escolhas ficam salvas neste navegador.</p>
+        </header>
+
+        <section class="memory-section" aria-labelledby="plans-title">
+            <h2 id="plans-title">Nossos planos</h2>
+            <ul class="plans-list" aria-labelledby="plans-title">
+                <li><label><input type="checkbox" value="por-do-sol"> <span>Ver o pôr do sol juntos e guardar uma foto desse momento.</span></label></li>
+                <li><label><input type="checkbox" value="cinema"> <span>Escolher um filme, preparar algo gostoso e fazer uma sessão de cinema a dois.</span></label></li>
+                <li><label><input type="checkbox" value="lugar-novo"> <span>Conhecer um lugar novo e passear sem pressa.</span></label></li>
+                <li><label><input type="checkbox" value="comida-diferente"> <span>Experimentar uma comida diferente e decidir qual de nós gostou mais.</span></label></li>
+                <li><label><input type="checkbox" value="playlist"> <span>Montar uma playlist com as músicas que forem marcando a nossa história.</span></label></li>
+                <li><label><input type="checkbox" value="primeiro-encontro"> <span>Voltar ao lugar do nosso primeiro encontro para relembrar aquele dia.</span></label></li>
+            </ul>
+            <p class="plans-status" role="status" aria-live="polite"></p>
+        </section>
+
+        <a class="continue-link" href="../Site%20principal/nossas-coisas/Botoes.html">Voltar ao site principal</a>
+    </main>
+
+    <script>
+        const plansList = document.querySelector(".plans-list");
+        const plansStatus = document.querySelector(".plans-status");
+        const plansStorageKey = "projeto-leticia-planos-realizados";
+        const planCheckboxes = [...plansList.querySelectorAll('input[type="checkbox"]')];
+
+        try {
+            const savedPlans = localStorage.getItem(plansStorageKey);
+            if (savedPlans !== null) {
+                const completedPlans = JSON.parse(savedPlans);
+                if (!Array.isArray(completedPlans) || completedPlans.some((plan) => typeof plan !== "string")) {
+                    throw new TypeError("O formato salvo para a checklist é inválido.");
+                }
+
+                planCheckboxes.forEach((checkbox) => {
+                    checkbox.checked = completedPlans.includes(checkbox.value);
+                });
+            }
+        } catch (error) {
+            plansStatus.textContent = "Não foi possível carregar as escolhas salvas. Você ainda pode marcar os planos nesta visita.";
+            console.error("Não foi possível carregar a checklist de planos.", error);
+        }
+
+        plansList.addEventListener("change", (event) => {
+            if (!(event.target instanceof HTMLInputElement) || event.target.type !== "checkbox") {
+                return;
+            }
+
+            try {
+                const completedPlans = planCheckboxes
+                    .filter((checkbox) => checkbox.checked)
+                    .map((checkbox) => checkbox.value);
+                localStorage.setItem(plansStorageKey, JSON.stringify(completedPlans));
+                plansStatus.textContent = "";
+            } catch (error) {
+                plansStatus.textContent = "Não foi possível salvar suas escolhas neste navegador.";
+                console.error("Não foi possível salvar a checklist de planos.", error);
+            }
+        });
+    </script>
+</body>
+</html>

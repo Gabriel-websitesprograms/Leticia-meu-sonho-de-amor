@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#080d20">
+    <meta name="description" content="Memórias, pequenos detalhes e sonhos que formam a nossa constelação.">
+    <title>Nossa Constelação | Projeto Letícia</title>
+    <link rel="stylesheet" href="../../assets/css/InterfaceProjeto-Leticia.css">
+    <link rel="stylesheet" href="../../assets/css/menu-romantico.css">
+    <link rel="stylesheet" href="../../assets/css/identidade-visual.css">
+    <link rel="stylesheet" href="../../assets/css/progresso-site.css">
+    <link rel="stylesheet" href="nossa-constelacao.css">
+    <script src="../../assets/js/cursor-romantico.js" defer></script>
+    <script src="../../assets/js/menu-romantico.js" defer></script>
+    <script src="nossa-constelacao.js" defer></script>
+    <script src="../../assets/js/progresso-site.js" defer></script>
+</head>
+<body class="nossa-constelacao">
+    <nav class="menu-romantico" aria-label="Navegação da constelação">
+        <span class="indicador" aria-hidden="true"></span>
+        <div class="menu-item"><a href="Botoes.html">Voltar ao menu</a></div>
+        <div class="menu-item"><a href="nossas-memorias.html">Nossas memórias</a></div>
+    </nav>
+
+    <main class="constellation-page">
+        <header class="constellation-intro">
+            <p class="constellation-eyebrow">Um universo particular</p>
+            <h1>Nossa Constelação <span aria-hidden="true">✦</span></h1>
+            <p>Cada estrela guarda um momento da nossa história.</p>
+        </header>
+
+        <ul class="constellation-legend" aria-label="Categorias das estrelas">
+            <li><span class="legend-star legend-gold" aria-hidden="true"></span>Momentos vividos</li>
+        </ul>
+
+        <section class="constellation-layout" aria-label="Mapa interativo de memórias">
+            <div class="constellation-sky" id="constellation-sky" aria-label="Céu com estrelas interativas">
+                <div class="nebula nebula-one" aria-hidden="true"></div>
+                <div class="nebula nebula-two" aria-hidden="true"></div>
+                <div class="sky-starfield" aria-hidden="true"></div>
+                <svg class="memory-connections" viewBox="0 0 1000 500" preserveAspectRatio="none" aria-hidden="true"></svg>
+                <div class="memory-stars"></div>
+            </div>
+
+            <aside class="memory-card" id="memory-card" aria-labelledby="memory-title" aria-live="polite" hidden>
+                <button class="memory-card-close" type="button" aria-label="Fechar memória">×</button>
+                <p class="memory-card-category"></p>
+                <h2 id="memory-title"></h2>
+                <time class="memory-card-date"></time>
+                <p class="memory-card-description"></p>
+                <figure class="memory-card-photo" hidden>
+                    <img alt="">
+                    <figcaption></figcaption>
+                </figure>
+                <p class="memory-card-photo-error" role="status" hidden>Esta fotografia não pôde ser carregada.</p>
+            </aside>
+        </section>
+
+        <p class="constellation-hint" role="status" aria-live="polite">Escolha uma estrela para abrir uma lembrança.</p>
+
+        <footer class="constellation-footer">
+            <p>As pequenas lembranças também iluminam grandes histórias.</p>
+        </footer>
+    </main>
+</body>
+</html>

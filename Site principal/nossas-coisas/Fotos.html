@@ -1,0 +1,1731 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../../assets/css/InterfaceProjeto-Leticia.css">
+    <script src="../../assets/js/cursor-romantico.js" defer></script>
+    <title>Fotos</title>
+    <link rel="stylesheet" href="../../assets/css/menu-romantico.css">
+    <script src="../../assets/js/menu-romantico.js" defer></script>
+    <style>
+        body.photos-page {
+            padding: 1rem clamp(0.75rem, 3vw, 2rem) 3rem;
+            background: #f5f0e9;
+            color: #362a2b;
+        }
+
+        body.photos-page::before,
+        body.photos-page::after {
+            display: none;
+        }
+
+        .photos-page .menu-romantico {
+            border-color: #d9c9b2;
+            background: rgba(250, 247, 241, 0.96);
+            animation: header-arrive 0.7s ease-out both;
+        }
+
+        .photos-page .menu-romantico .indicador {
+            background: #6e4b4b;
+        }
+
+        .photos-page .menu-romantico .menu-item:first-of-type > a {
+            color: #fff;
+        }
+
+        .photos-page .menu-romantico a,
+        .photos-page .menu-romantico .menu-trigger {
+            color: #503a39;
+        }
+
+        .photos-page .menu-romantico a:hover,
+        .photos-page .menu-romantico a:focus-visible,
+        .photos-page .menu-romantico .menu-trigger:hover,
+        .photos-page .menu-romantico .menu-trigger:focus-visible {
+            color: #fff;
+        }
+
+        .photos-page main {
+            max-width: 1000px;
+        }
+
+        .photos-intro {
+            position: relative;
+            margin: 2.5rem auto 1.5rem;
+            padding: 1.1rem 0 1.35rem;
+            animation: header-arrive 0.8s 0.12s ease-out both;
+        }
+
+        .photos-intro::before {
+            display: block;
+            margin-bottom: 0.65rem;
+            color: #9a806a;
+            content: "ÁLBUM DE MEMÓRIAS";
+            font-size: 0.72rem;
+            font-weight: bold;
+            letter-spacing: 0.22em;
+        }
+
+        .photos-intro::after {
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            width: min(10rem, 45%);
+            height: 1px;
+            background: linear-gradient(90deg, transparent, #b99a70, transparent);
+            content: "";
+            transform: translateX(-50%) scaleX(0);
+            transform-origin: center;
+            animation: heading-rule 0.9s 0.55s ease-out forwards;
+        }
+
+        .photos-intro h1 {
+            margin: 0;
+            padding: 0;
+            background: transparent;
+            box-shadow: none;
+            color: #654848;
+            font-size: clamp(2.4rem, 7vw, 4rem);
+        }
+
+        .photos-intro p {
+            margin: 0.75rem 0 0;
+            color: #756461;
+            font-family: Georgia, "Times New Roman", serif;
+            font-size: clamp(1rem, 2.5vw, 1.2rem);
+        }
+
+        .photos-footer {
+            position: relative;
+            max-width: 1000px;
+            margin: 0.75rem auto 0;
+            padding: 1rem 0.75rem 0.4rem;
+            border-top: 1px solid #d9c9b2;
+            color: #756461;
+            animation: footer-arrive 0.8s 0.25s ease-out both;
+        }
+
+        .photos-footer::before {
+            position: absolute;
+            top: -0.65rem;
+            left: 50%;
+            padding: 0 0.75rem;
+            background: #f5f0e9;
+            color: #9a806a;
+            content: "✦";
+            font-size: 0.85rem;
+            transform: translateX(-50%);
+        }
+
+        .photos-footer p {
+            margin: 0.25rem 0;
+            font-family: Georgia, "Times New Roman", serif;
+        }
+
+        .photos-footer .footer-signature {
+            color: #654848;
+            font-size: 1.05rem;
+            font-style: italic;
+        }
+
+        .footer-heart {
+            display: inline-block;
+            margin: 0 0.25rem;
+            color: #986c68;
+            animation: footer-heartbeat 2.4s ease-in-out infinite;
+        }
+
+        .memory-carousel {
+            padding: clamp(0.75rem, 2.5vw, 1.4rem);
+            border: 1px solid #d9c9b2;
+            border-radius: 22px;
+            background: #fcfaf6;
+            box-shadow: 0 22px 55px rgba(61, 43, 39, 0.13);
+        }
+
+        .carousel-stage {
+            position: relative;
+            display: grid;
+            min-height: clamp(18rem, 60vh, 42rem);
+            place-items: center;
+            overflow: hidden;
+            border: 1px solid #e3d8c8;
+            border-radius: 15px;
+            background:
+                radial-gradient(ellipse at center, rgba(255, 255, 255, 0.08), transparent 72%),
+                #302629;
+        }
+
+        .carousel-slide {
+            display: grid;
+            width: 100%;
+            height: 100%;
+            min-height: inherit;
+            grid-template-rows: minmax(0, 1fr) auto;
+            justify-items: center;
+            margin: 0;
+        }
+
+        .carousel-slide.is-sliding {
+            animation: photo-slide-in 0.7s cubic-bezier(0.22, 0.72, 0.18, 1) both;
+        }
+
+        .carousel-slide[hidden] {
+            display: none;
+        }
+
+        .carousel-open {
+            display: grid;
+            width: 100%;
+            min-height: 0;
+            place-items: center;
+            padding: 0.75rem;
+            border: 0;
+            background: transparent;
+            cursor: zoom-in;
+        }
+
+        .carousel-open:focus-visible,
+        .carousel-control:focus-visible,
+        .carousel-thumbnail:focus-visible {
+            outline: 3px solid #b99a70;
+            outline-offset: 3px;
+        }
+
+        .carousel-open img {
+            display: block;
+            width: auto;
+            height: auto;
+            max-width: 100%;
+            max-height: min(58vh, 38rem);
+            border: 1px solid rgba(255, 255, 255, 0.38);
+            border-radius: 7px;
+            object-fit: contain;
+            box-shadow: 0 12px 34px rgba(0, 0, 0, 0.28);
+            transition: transform 0.35s ease;
+        }
+
+        .carousel-open:hover img {
+            transform: scale(1.015);
+        }
+
+        .carousel-caption {
+            width: 100%;
+            padding: 0 1rem 1rem;
+            color: #f6eee4;
+            font-family: Georgia, "Times New Roman", serif;
+            font-size: 1.05rem;
+            letter-spacing: 0.02em;
+        }
+
+        .carousel-controls {
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            justify-content: center;
+            gap: clamp(1rem, 4vw, 2rem);
+            padding: 1rem 0 0.8rem;
+        }
+
+        .carousel-control {
+            display: grid;
+            width: 2.85rem;
+            height: 2.85rem;
+            place-items: center;
+            border: 1px solid #c9b69b;
+            border-radius: 50%;
+            background: #fffdf9;
+            color: #654848;
+            font: 1.4rem/1 Georgia, "Times New Roman", serif;
+            cursor: pointer;
+            transition: background-color 0.2s ease, transform 0.2s ease;
+        }
+
+        .carousel-control:hover {
+            background: #eee4d5;
+            transform: scale(1.06);
+        }
+
+        .carousel-toggle {
+            min-height: 2.6rem;
+            padding: 0.55rem 0.85rem;
+            border: 1px solid #c9b69b;
+            border-radius: 999px;
+            background: #fffdf9;
+            color: #654848;
+            font: inherit;
+            font-size: 0.85rem;
+            cursor: pointer;
+            transition: background-color 0.2s ease;
+        }
+
+        .carousel-toggle:hover {
+            background: #eee4d5;
+        }
+
+        .carousel-count {
+            min-width: 4.5rem;
+            color: #654848;
+            font-size: 0.95rem;
+            font-variant-numeric: tabular-nums;
+            letter-spacing: 0.12em;
+        }
+
+        .carousel-thumbnails {
+            display: flex;
+            gap: 0.65rem;
+            overflow-x: auto;
+            padding: 0.5rem 0.25rem 0.75rem;
+            scrollbar-color: #b99a70 #eee8df;
+            scrollbar-width: thin;
+        }
+
+        .carousel-thumbnail {
+            position: relative;
+            flex: 0 0 5.25rem;
+            height: 4.1rem;
+            overflow: hidden;
+            padding: 3px;
+            border: 1px solid #d7c8b4;
+            border-radius: 9px;
+            background: #fff;
+            opacity: 0.66;
+            cursor: pointer;
+            transition: opacity 0.2s ease, border-color 0.2s ease, transform 0.2s ease;
+        }
+
+        .carousel-thumbnail:hover {
+            opacity: 0.9;
+            transform: translateY(-2px);
+        }
+
+        .carousel-thumbnail[aria-current="true"] {
+            border: 2px solid #795858;
+            opacity: 1;
+        }
+
+        .carousel-thumbnail img {
+            display: block;
+            width: 100%;
+            height: 100%;
+            border-radius: 5px;
+            object-fit: cover;
+        }
+
+        .photo-lightbox {
+            background: rgba(27, 21, 22, 0.88);
+        }
+
+        .photo-lightbox-panel {
+            border-color: #d9c9b2;
+            background: #f5f0e9;
+        }
+
+        .photo-lightbox-close {
+            border-color: #f5f0e9;
+            background: #654848;
+        }
+
+        .photos-page .photo-lightbox {
+            padding: max(1rem, env(safe-area-inset-top)) max(1rem, env(safe-area-inset-right)) max(1rem, env(safe-area-inset-bottom)) max(1rem, env(safe-area-inset-left));
+            overflow: auto;
+            background:
+                radial-gradient(ellipse at 18% 20%, rgb(201 135 152 / 17%), transparent 32rem),
+                radial-gradient(ellipse at 84% 82%, rgb(181 150 91 / 14%), transparent 34rem),
+                rgb(25 19 23 / 94%);
+            backdrop-filter: blur(18px);
+            -webkit-backdrop-filter: blur(18px);
+            animation: viewer-backdrop-in 360ms ease-out both;
+        }
+
+        .photos-page .photo-lightbox-panel {
+            position: relative;
+            display: grid;
+            grid-template-rows: auto minmax(0, 1fr) auto;
+            gap: clamp(0.65rem, 2vh, 1.15rem);
+            width: min(100%, 74rem);
+            height: min(92dvh, 58rem);
+            max-width: 100%;
+            max-height: 100%;
+            padding: clamp(0.8rem, 2.5vw, 1.4rem);
+            overflow: hidden;
+            border: 1px solid rgb(214 188 146 / 72%);
+            border-radius: clamp(1.2rem, 3vw, 2rem);
+            background:
+                linear-gradient(145deg, rgb(255 253 249 / 98%), rgb(247 239 231 / 98%));
+            box-shadow:
+                0 0 0 5px rgb(181 150 91 / 10%),
+                0 28px 90px rgb(0 0 0 / 44%);
+            animation: viewer-panel-in 520ms cubic-bezier(.2,.8,.2,1) both;
+        }
+
+        .photos-page .photo-lightbox-panel::before,
+        .photos-page .photo-lightbox-panel::after {
+            position: absolute;
+            z-index: 3;
+            color: #b5965b;
+            font: 1.4rem/1 Georgia, "Times New Roman", serif;
+            pointer-events: none;
+        }
+
+        .photos-page .photo-lightbox-panel::before {
+            top: 0.55rem;
+            left: 0.65rem;
+            content: "✧";
+        }
+
+        .photos-page .photo-lightbox-panel::after {
+            right: 0.65rem;
+            bottom: 0.55rem;
+            content: "✿";
+        }
+
+        .photo-viewer-topbar {
+            display: grid;
+            grid-template-columns: 1fr auto 1fr;
+            align-items: center;
+            gap: 0.75rem;
+            min-width: 0;
+            padding: 0.1rem 0.25rem 0.15rem;
+        }
+
+        .photo-viewer-kicker {
+            grid-column: 2;
+            margin: 0;
+            color: #8c6a48;
+            font: 700 clamp(0.62rem, 1.6vw, 0.76rem)/1.3 "Segoe UI", Arial, sans-serif;
+            letter-spacing: 0.2em;
+            text-align: center;
+        }
+
+        .photos-page .photo-lightbox-close {
+            position: static;
+            grid-column: 3;
+            grid-row: 1;
+            justify-self: end;
+            width: auto;
+            height: auto;
+            min-height: 2.5rem;
+            padding: 0.55rem 0.9rem;
+            border: 1px solid rgb(120 55 79 / 18%);
+            background: #f3e8e5;
+            box-shadow: none;
+            color: #78374f;
+            font: 650 0.82rem/1 "Segoe UI", Arial, sans-serif;
+            opacity: 1;
+            pointer-events: auto;
+            transform: none;
+        }
+
+        .photos-page .photo-lightbox.is-controls-visible .photo-lightbox-close,
+        .photos-page .photo-lightbox-close:focus-visible {
+            opacity: 1;
+            pointer-events: auto;
+            transform: none;
+        }
+
+        .photo-viewer-stage {
+            position: relative;
+            display: grid;
+            min-height: 0;
+            place-items: center;
+            overflow: hidden;
+            isolation: isolate;
+            border: 1px solid rgb(181 150 91 / 52%);
+            border-radius: clamp(0.8rem, 2vw, 1.35rem);
+            background: #211a1d;
+            box-shadow: inset 0 0 0 5px rgb(255 255 255 / 5%);
+        }
+
+        .photo-viewer-stage::before {
+            position: absolute;
+            z-index: -1;
+            inset: -2rem;
+            background-image: var(--viewer-image);
+            background-position: center;
+            background-size: cover;
+            content: "";
+            filter: blur(24px) brightness(0.42) saturate(0.8);
+            opacity: 0.72;
+            transform: scale(1.08);
+        }
+
+        .photos-page .photo-lightbox-image {
+            position: relative;
+            z-index: 1;
+            width: auto;
+            height: auto;
+            max-width: calc(100% - clamp(2.5rem, 9vw, 7rem));
+            max-height: 100%;
+            border: 1px solid rgb(255 255 255 / 75%);
+            border-radius: 0.55rem;
+            object-fit: contain;
+            box-shadow: 0 14px 42px rgb(0 0 0 / 42%);
+            will-change: transform, opacity, filter;
+        }
+
+        .photos-page .photo-lightbox-image.is-entering-next {
+            animation: viewer-photo-next 560ms cubic-bezier(.2,.75,.2,1) both;
+        }
+
+        .photos-page .photo-lightbox-image.is-entering-previous {
+            animation: viewer-photo-previous 560ms cubic-bezier(.2,.75,.2,1) both;
+        }
+
+        .photo-viewer-nav {
+            position: absolute;
+            z-index: 2;
+            top: 50%;
+            display: grid;
+            width: clamp(2.65rem, 6vw, 3.5rem);
+            height: clamp(2.65rem, 6vw, 3.5rem);
+            place-items: center;
+            padding: 0 0 0.18em;
+            border: 1px solid rgb(255 255 255 / 64%);
+            border-radius: 50%;
+            background: rgb(255 253 249 / 88%);
+            box-shadow: 0 6px 18px rgb(0 0 0 / 20%);
+            color: #78374f;
+            font: 2rem/1 Georgia, "Times New Roman", serif;
+            cursor: pointer;
+            transform: translateY(-50%);
+            transition: background 180ms ease, box-shadow 180ms ease, transform 180ms ease;
+        }
+
+        .photo-viewer-nav:hover {
+            background: #fff;
+            box-shadow: 0 8px 24px rgb(0 0 0 / 28%);
+            transform: translateY(-50%) scale(1.08);
+        }
+
+        .photo-viewer-nav-previous { left: clamp(0.65rem, 2vw, 1.25rem); }
+        .photo-viewer-nav-next { right: clamp(0.65rem, 2vw, 1.25rem); }
+
+        .photo-viewer-footer {
+            display: grid;
+            grid-template-columns: 1fr minmax(5rem, 12rem) 1fr;
+            align-items: center;
+            gap: 0.65rem 1rem;
+            min-width: 0;
+            padding: 0.1rem 0.5rem 0.2rem;
+        }
+
+        .photo-viewer-caption {
+            grid-column: 1 / -1;
+            margin: 0;
+            color: #523c3e;
+            font: italic clamp(1rem, 2.2vw, 1.3rem)/1.35 Georgia, "Times New Roman", serif;
+            text-align: center;
+            text-wrap: balance;
+        }
+
+        .photo-viewer-count {
+            color: #806451;
+            font: 700 0.72rem/1 "Segoe UI", Arial, sans-serif;
+            font-variant-numeric: tabular-nums;
+            letter-spacing: 0.1em;
+        }
+
+        .photo-viewer-progress {
+            width: 100%;
+            height: 0.22rem;
+            overflow: hidden;
+            border: 0;
+            border-radius: 999px;
+            appearance: none;
+            background: #e8ddd0;
+        }
+
+        .photo-viewer-progress::-webkit-progress-bar {
+            border-radius: 999px;
+            background: #e8ddd0;
+        }
+
+        .photo-viewer-progress::-webkit-progress-value {
+            border-radius: 999px;
+            background: linear-gradient(90deg, #d6bd8b, #9d526b);
+            transition: width 420ms ease;
+        }
+
+        .photo-viewer-progress::-moz-progress-bar {
+            border-radius: 999px;
+            background: linear-gradient(90deg, #d6bd8b, #9d526b);
+            transition: width 420ms ease;
+        }
+
+        .photos-page .photo-lightbox-image {
+            width: auto;
+            height: auto;
+            max-width: calc(100vw - 3.25rem - env(safe-area-inset-left) - env(safe-area-inset-right));
+            max-height: calc(100dvh - 3.25rem - env(safe-area-inset-top) - env(safe-area-inset-bottom));
+            border: 0;
+            border-radius: 0.45rem;
+            object-fit: contain;
+            object-position: center;
+        }
+
+        .photo-lightbox-close:hover,
+        .photo-lightbox-close:focus-visible {
+            background: #362a2b;
+        }
+
+        body.photos-page {
+            min-height: 100vh;
+            min-height: 100dvh;
+            padding: 0;
+            overflow: hidden;
+            background: #171315;
+            color: #fff;
+        }
+
+        .photos-page .menu-romantico {
+            position: fixed;
+            animation: none;
+            top: max(0.75rem, env(safe-area-inset-top));
+            left: 50%;
+            z-index: 1300;
+            margin: 0;
+            opacity: 0;
+            pointer-events: none;
+            transform: translate(-50%, -0.6rem);
+            transition: opacity 0.2s ease, transform 0.2s ease;
+        }
+
+        .photos-page.carousel-ui-visible .menu-romantico {
+            opacity: 1;
+            pointer-events: auto;
+            transform: translate(-50%, 0);
+        }
+
+        .photos-page main {
+            position: fixed;
+            inset: 0;
+            width: 100vw;
+            height: 100vh;
+            height: 100dvh;
+            max-width: none;
+            margin: 0;
+        }
+
+        .photos-page main > section,
+        .photos-page .memory-carousel {
+            width: 100%;
+            height: 100%;
+        }
+
+        .photos-page .photos-intro,
+        .photos-page .photos-footer,
+        .photos-page .carousel-thumbnails {
+            display: none;
+        }
+
+        .photos-page .memory-carousel {
+            position: absolute;
+            inset: 0;
+            padding: 0;
+            border: 0;
+            border-radius: 0;
+            background: #171315;
+            box-shadow: none;
+        }
+
+        .photos-page .carousel-stage {
+            position: absolute;
+            inset: 0;
+            width: 100%;
+            height: 100%;
+            min-height: 0;
+            border: 0;
+            border-radius: 0;
+            background: #171315;
+        }
+
+        .photos-page .carousel-slide[hidden] {
+            display: none;
+        }
+
+        .photos-page .carousel-slide {
+            position: absolute;
+            inset: 0;
+            width: 100%;
+            height: 100%;
+            min-height: 0;
+            display: block;
+            margin: 0;
+        }
+
+        .photos-page .carousel-open {
+            position: absolute;
+            inset: 0;
+            display: grid;
+            width: 100%;
+            height: 100%;
+            place-items: center;
+            padding: 0;
+            cursor: zoom-in;
+        }
+
+        .photos-page .carousel-open img {
+            width: auto;
+            height: auto;
+            max-width: 100vw;
+            max-width: 100dvw;
+            max-height: 100vh;
+            max-height: 100dvh;
+            border: 0;
+            border-radius: 0;
+            object-fit: contain;
+            box-shadow: none;
+            transition: none;
+        }
+
+        .photos-page .carousel-open:hover img {
+            transform: none;
+        }
+
+        .photos-page .carousel-caption {
+            position: absolute;
+            right: 0;
+            bottom: calc(env(safe-area-inset-bottom) + 5.5rem);
+            left: 0;
+            width: fit-content;
+            max-width: min(90vw, 42rem);
+            margin: 0 auto;
+            padding: 0.55rem 1rem;
+            border-radius: 999px;
+            background: rgba(23, 19, 21, 0.58);
+            color: #fff;
+            text-align: center;
+            text-shadow: 0 1px 5px #000;
+            pointer-events: none;
+        }
+
+        .photos-page .carousel-controls {
+            position: absolute;
+            right: 0;
+            bottom: max(0.75rem, env(safe-area-inset-bottom));
+            left: 0;
+            z-index: 2;
+            width: fit-content;
+            max-width: calc(100% - 1rem);
+            margin: 0 auto;
+            padding: 0.5rem;
+            gap: 0.75rem;
+            border: 1px solid rgba(255, 255, 255, 0.24);
+            border-radius: 999px;
+            background: rgba(23, 19, 21, 0.7);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            opacity: 0;
+            pointer-events: none;
+            transform: translateY(0.5rem);
+            transition: opacity 0.2s ease, transform 0.2s ease;
+        }
+
+        .photos-page.carousel-ui-visible .carousel-controls {
+            opacity: 1;
+            pointer-events: auto;
+            transform: translateY(0);
+        }
+
+        .photos-page .carousel-control,
+        .photos-page .carousel-toggle {
+            border-color: rgba(255, 255, 255, 0.55);
+            background: rgba(255, 255, 255, 0.94);
+            color: #362a2b;
+        }
+
+        .photos-page .carousel-count {
+            color: #fff;
+        }
+
+        @media (hover: none), (pointer: coarse) {
+            .photos-page .menu-romantico,
+            .photos-page .carousel-controls {
+                opacity: 1;
+                pointer-events: auto;
+                transform: none;
+            }
+        }
+
+        @keyframes photo-slide-in {
+            from {
+                opacity: 0.25;
+                filter: blur(5px);
+                transform: translateX(var(--slide-offset, 3rem)) scale(0.985);
+            }
+            to {
+                opacity: 1;
+                filter: blur(0);
+                transform: translateX(0) scale(1);
+            }
+        }
+
+        @keyframes header-arrive {
+            from { opacity: 0; transform: translateY(-10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes heading-rule {
+            to { transform: translateX(-50%) scaleX(1); }
+        }
+
+        @keyframes footer-arrive {
+            from { opacity: 0; transform: translateY(12px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes footer-heartbeat {
+            0%, 100% { transform: scale(1); }
+            12%, 28% { transform: scale(1.16); }
+            20%, 36% { transform: scale(1); }
+        }
+
+        @media (max-width: 600px) {
+            .photos-intro {
+                margin-top: 1.75rem;
+            }
+
+            .carousel-stage {
+                min-height: 55vh;
+            }
+
+            .carousel-open img {
+                max-height: 46vh;
+            }
+
+            .carousel-thumbnail {
+                flex-basis: 4.5rem;
+                height: 3.5rem;
+            }
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            .carousel-slide,
+            .carousel-open img,
+            .carousel-control,
+            .carousel-thumbnail,
+            .photos-page .menu-romantico,
+            .photos-intro,
+            .photos-intro::after,
+            .photos-footer,
+            .footer-heart {
+                animation: none;
+                transition: none;
+            }
+
+            .carousel-slide.is-sliding {
+                animation: none;
+            }
+
+            .photos-intro::after {
+                transform: translateX(-50%) scaleX(1);
+            }
+        }
+
+        body.photos-page {
+            min-height: 100vh;
+            min-height: 100dvh;
+            padding: 0 clamp(0.75rem, 3vw, 2rem) 2rem;
+            overflow-x: clip;
+            overflow-y: auto;
+            background:
+                radial-gradient(ellipse at 12% 18%, rgb(226 177 187 / 24%), transparent 26rem),
+                radial-gradient(ellipse at 92% 78%, rgb(181 150 91 / 12%), transparent 30rem),
+                #fbf7f3;
+            color: #3d2932;
+        }
+
+        .photos-page .menu-romantico {
+            position: sticky;
+            top: max(0.75rem, env(safe-area-inset-top));
+            left: auto;
+            z-index: 20;
+            margin: 0.75rem auto 0;
+            opacity: 1;
+            pointer-events: auto;
+            transform: none;
+        }
+
+        .photos-page main {
+            position: relative;
+            inset: auto;
+            width: min(100%, 68rem);
+            height: auto;
+            max-width: 68rem;
+            margin: 0 auto;
+        }
+
+        .photos-page main > section {
+            width: 100%;
+            height: auto;
+        }
+
+        .photos-page .photos-intro,
+        .photos-page .photos-footer {
+            display: block;
+        }
+
+        .photos-page .photos-intro {
+            margin: 1.6rem auto 1rem;
+            text-align: center;
+        }
+
+        .photos-page .photos-intro h1 {
+            color: #78374f;
+        }
+
+        .photos-page .photos-intro p {
+            color: #705b61;
+        }
+
+        .photos-page .memory-carousel {
+            display: none;
+        }
+
+        .photo-wall {
+            position: relative;
+            display: grid;
+            grid-template-columns: repeat(3, minmax(0, 1fr));
+            gap: clamp(0.9rem, 2.6vw, 1.8rem);
+            width: min(100%, 64rem);
+            height: min(96vh, 72rem);
+            height: min(96dvh, 72rem);
+            min-height: 44rem;
+            margin: 0 auto;
+            padding: clamp(0.65rem, 2vw, 1.15rem);
+            overflow: hidden;
+            border: 1px solid rgb(181 150 91 / 35%);
+            border-radius: 1.5rem;
+            background:
+                linear-gradient(135deg, rgb(255 255 255 / 84%), rgb(252 240 241 / 75%)),
+                #fbf7f3;
+            box-shadow: 0 16px 42px rgb(61 41 50 / 11%);
+            -webkit-mask-image: linear-gradient(to bottom, transparent, #000 2%, #000 98%, transparent);
+            mask-image: linear-gradient(to bottom, transparent, #000 2%, #000 98%, transparent);
+        }
+
+        .photo-wall-column {
+            min-width: 0;
+            overflow: hidden;
+        }
+
+        .photo-wall-column:nth-child(2) {
+            padding-top: 2.5rem;
+        }
+
+        .photo-wall-column:nth-child(3) {
+            padding-top: 0.9rem;
+        }
+
+        .photo-wall-track,
+        .photo-wall-sequence {
+            display: flex;
+            flex-direction: column;
+            gap: clamp(0.7rem, 1.8vw, 1.1rem);
+        }
+
+        .photo-wall-track {
+            gap: 0;
+            will-change: transform;
+            animation: photo-wall-rise var(--photo-wall-duration, 40s) linear infinite;
+        }
+
+        .photo-wall-column:nth-child(2) .photo-wall-track {
+            --photo-wall-duration: 47s;
+        }
+
+        .photo-wall-column:nth-child(3) .photo-wall-track {
+            --photo-wall-duration: 43s;
+        }
+
+        .photo-wall-sequence {
+            flex: 0 0 auto;
+            padding-bottom: clamp(0.75rem, 2vw, 1.25rem);
+        }
+
+        .photo-memory-card {
+            display: block;
+            width: 100%;
+            padding: 0.42rem 0.42rem 0.25rem;
+            overflow: hidden;
+            border: 1px solid #e6d9c8;
+            border-radius: 1rem;
+            background: #fffdfa;
+            box-shadow: 0 7px 18px rgb(61 41 50 / 12%);
+            color: #78374f;
+            cursor: zoom-in;
+            text-align: left;
+            transition: transform 220ms ease, box-shadow 220ms ease;
+        }
+
+        .photo-memory-card:hover,
+        .photo-memory-card:focus-visible {
+            z-index: 1;
+            transform: translateY(-3px);
+            box-shadow: 0 12px 24px rgb(61 41 50 / 18%);
+        }
+
+        .photo-memory-card:focus-visible {
+            outline: 2px solid #b5965b;
+            outline-offset: 3px;
+        }
+
+        .photo-memory-card img {
+            display: block;
+            width: 100%;
+            aspect-ratio: 4 / 4.7;
+            border-radius: 0.68rem 0.68rem 0.35rem 0.35rem;
+            object-fit: cover;
+        }
+
+        .photo-memory-caption {
+            display: flex;
+            min-height: 2.15rem;
+            align-items: center;
+            justify-content: space-between;
+            gap: 0.35rem;
+            padding: 0.3rem 0.28rem 0.1rem;
+            color: #5e444b;
+            font-family: Georgia, "Times New Roman", serif;
+            font-size: clamp(0.72rem, 1.8vw, 0.95rem);
+            font-style: italic;
+            line-height: 1.2;
+        }
+
+        .photo-memory-heart {
+            flex: 0 0 auto;
+            color: #a64e64;
+            font-size: 1rem;
+        }
+
+        .photos-page .photos-footer {
+            margin-top: 0.75rem;
+            text-align: center;
+        }
+
+        .photos-page.photo-lightbox-open,
+        .photos-page.photo-lightbox-open * {
+            cursor: auto !important;
+        }
+
+        .photos-page.photo-lightbox-open .rose-cursor,
+        .photos-page.photo-lightbox-open .rose-cursor-petal {
+            display: none !important;
+        }
+
+        @keyframes viewer-backdrop-in {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        @keyframes viewer-panel-in {
+            from { opacity: 0; transform: translateY(1.25rem) scale(0.975); }
+            to { opacity: 1; transform: translateY(0) scale(1); }
+        }
+
+        @keyframes viewer-photo-next {
+            from { opacity: 0; filter: blur(8px); transform: translateX(2.5rem) scale(0.97); }
+            to { opacity: 1; filter: blur(0); transform: translateX(0) scale(1); }
+        }
+
+        @keyframes viewer-photo-previous {
+            from { opacity: 0; filter: blur(8px); transform: translateX(-2.5rem) scale(0.97); }
+            to { opacity: 1; filter: blur(0); transform: translateX(0) scale(1); }
+        }
+
+        @keyframes photo-wall-rise {
+            to {
+                transform: translateY(-50%);
+            }
+        }
+
+        @media (max-width: 600px) {
+            body.photos-page {
+                padding-inline: 0.6rem;
+            }
+
+            .photos-page .photos-intro {
+                margin: 1.25rem auto 0.8rem;
+                padding-inline: 0.5rem;
+            }
+
+            .photo-wall {
+                height: 90vh;
+                height: 90dvh;
+                min-height: 40rem;
+                gap: 0.75rem;
+                padding: 0.55rem;
+                border-radius: 1.1rem;
+            }
+
+            .photo-wall-column:nth-child(2) {
+                padding-top: 1.5rem;
+            }
+
+            .photo-wall-column:nth-child(3) {
+                padding-top: 0.55rem;
+            }
+
+            .photo-memory-card {
+                padding: 0.28rem 0.28rem 0.16rem;
+                border-radius: 0.72rem;
+            }
+
+            .photo-memory-card img {
+                aspect-ratio: 4 / 5;
+                border-radius: 0.48rem 0.48rem 0.25rem 0.25rem;
+            }
+
+            .photo-memory-caption {
+                min-height: 1.7rem;
+                padding-inline: 0.15rem;
+                font-size: clamp(0.58rem, 2.5vw, 0.75rem);
+            }
+
+            .photo-memory-heart {
+                font-size: 0.8rem;
+            }
+
+            .photos-page .photo-lightbox {
+                padding: max(0.55rem, env(safe-area-inset-top)) 0.55rem max(0.55rem, env(safe-area-inset-bottom));
+            }
+
+            .photos-page .photo-lightbox-panel {
+                width: 100%;
+                height: min(94dvh, 58rem);
+                gap: 0.55rem;
+                padding: 0.65rem;
+                border-radius: 1.15rem;
+            }
+
+            .photo-viewer-topbar {
+                grid-template-columns: 1fr auto;
+                gap: 0.35rem;
+            }
+
+            .photo-viewer-kicker {
+                grid-column: 1;
+                justify-self: start;
+                padding-left: 0.25rem;
+                font-size: 0.58rem;
+                letter-spacing: 0.14em;
+            }
+
+            .photos-page .photo-lightbox-close {
+                grid-column: 2;
+                min-height: 2.25rem;
+                padding: 0.45rem 0.7rem;
+                font-size: 0.75rem;
+            }
+
+            .photos-page .photo-lightbox-image {
+                max-width: calc(100% - 3.8rem);
+                max-height: 100%;
+            }
+
+            .photo-viewer-nav {
+                width: 2.35rem;
+                height: 2.35rem;
+                font-size: 1.55rem;
+            }
+
+            .photo-viewer-nav-previous { left: 0.35rem; }
+            .photo-viewer-nav-next { right: 0.35rem; }
+
+            .photo-viewer-footer {
+                grid-template-columns: auto minmax(3rem, 1fr) auto;
+                gap: 0.55rem;
+                padding-inline: 0.2rem;
+            }
+
+            .photo-viewer-caption {
+                font-size: 1rem;
+            }
+
+            .photo-viewer-count {
+                font-size: 0.64rem;
+            }
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            .photo-wall {
+                height: auto;
+                min-height: 0;
+                overflow: visible;
+                -webkit-mask-image: none;
+                mask-image: none;
+            }
+
+            .photo-wall-column {
+                overflow: visible;
+            }
+
+            .photo-wall-track {
+                animation: none;
+            }
+
+            .photo-wall-sequence:nth-child(2) {
+                display: none;
+            }
+
+            .photo-memory-card {
+                transition: none;
+            }
+
+            .photos-page .photo-lightbox,
+            .photos-page .photo-lightbox-panel,
+            .photos-page .photo-lightbox-image.is-entering-next,
+            .photos-page .photo-lightbox-image.is-entering-previous {
+                animation: none;
+            }
+
+            .photo-viewer-progress::-webkit-progress-value,
+            .photo-viewer-progress::-moz-progress-bar,
+            .photo-viewer-nav {
+                transition: none;
+            }
+        }
+    </style>
+    <link rel="stylesheet" href="../../assets/css/brand-doodles.css">
+    <link rel="stylesheet" href="../../assets/css/progresso-site.css">
+    <script src="../../assets/js/progresso-site.js" defer></script>
+    <link rel="stylesheet" href="../../assets/css/identidade-visual.css">
+</head>
+<body class="ornamento-rosas photos-page">
+<nav class="menu-romantico" aria-label="Navegação desta seção">
+    <span class="indicador" aria-hidden="true"></span>
+    <div class="menu-item"><a href="Botoes.html" data-voltar>Voltar</a></div>
+    <div class="menu-item">
+        <button class="menu-trigger" type="button">Nossas coisas</button>
+        <div class="submenu" aria-label="Fotos, vídeos e presentes">
+            <a href="Fotos.html">Fotos</a>
+            <a href="videos.html">Vídeos</a>
+            <a href="presentes.html">Presentes</a>
+        </div>
+    </div>
+</nav>
+    <main>
+        <section aria-labelledby="fotos">
+            <header class="photos-intro">
+                <h1 id="fotos">Nossas lembranças</h1>
+                <p>Pequenos instantes, guardados para sempre com carinho.</p>
+            </header>
+            <div class="memory-carousel" aria-label="Carrossel de fotos do casal">
+                <div class="carousel-stage" aria-live="off" aria-atomic="true">
+                    <figure class="carousel-slide">
+                        <button class="carousel-open" type="button" aria-label="Ampliar foto 1: um momento especial">
+                            <img src="../../Fotos-nossas/Foto-1.jpeg" alt="Um momento especial nosso" fetchpriority="high">
+                        </button>
+                        <figcaption class="carousel-caption">Um momento especial</figcaption>
+                    </figure>
+                    <figure class="carousel-slide" hidden>
+                        <button class="carousel-open" type="button" aria-label="Ampliar foto 2: nosso encontro">
+                            <img src="../../Fotos-nossas/WhatsApp%20Image%202026-10-10%20at%2016.46.03.jpeg" alt="Nós juntos em 10 de outubro">
+                        </button>
+                        <figcaption class="carousel-caption">Nosso encontro · 10 de outubro</figcaption>
+                    </figure>
+                    <figure class="carousel-slide" hidden>
+                        <button class="carousel-open" type="button" aria-label="Ampliar foto 3: nosso encontro">
+                            <img src="../../Fotos-nossas/WhatsApp%20Image%202026-10-10%20at%2016.46.03%20(1).jpeg" alt="Uma lembrança do nosso encontro em 10 de outubro">
+                        </button>
+                        <figcaption class="carousel-caption">Um dia para guardar</figcaption>
+                    </figure>
+                    <figure class="carousel-slide" hidden>
+                        <button class="carousel-open" type="button" aria-label="Ampliar foto 4: nosso encontro">
+                            <img src="../../Fotos-nossas/WhatsApp%20Image%202026-10-10%20at%2016.46.03%20(2).jpeg" alt="Nós juntos em um momento especial">
+                        </button>
+                        <figcaption class="carousel-caption">Do seu lado, tudo fica mais bonito</figcaption>
+                    </figure>
+                    <figure class="carousel-slide" hidden>
+                        <button class="carousel-open" type="button" aria-label="Ampliar foto 5: nosso encontro">
+                            <img src="../../Fotos-nossas/WhatsApp%20Image%202026-10-10%20at%2016.46.03%20(3).jpeg" alt="Uma foto nossa de 10 de outubro">
+                        </button>
+                        <figcaption class="carousel-caption">Um sorriso que vale guardar</figcaption>
+                    </figure>
+                    <figure class="carousel-slide" hidden>
+                        <button class="carousel-open" type="button" aria-label="Ampliar foto 6: nosso encontro">
+                            <img src="../../Fotos-nossas/WhatsApp%20Image%202026-10-10%20at%2016.46.03%20(4).jpeg" alt="Mais uma lembrança do nosso encontro">
+                        </button>
+                        <figcaption class="carousel-caption">A nossa história em pequenos detalhes</figcaption>
+                    </figure>
+                    <figure class="carousel-slide" hidden>
+                        <button class="carousel-open" type="button" aria-label="Ampliar foto 7: nosso encontro">
+                            <img src="../../Fotos-nossas/WhatsApp%20Image%202026-10-10%20at%2017.31.16.jpeg" alt="Nós juntos em 10 de outubro">
+                        </button>
+                        <figcaption class="carousel-caption">Um instante que virou lembrança</figcaption>
+                    </figure>
+                    <figure class="carousel-slide" hidden>
+                        <button class="carousel-open" type="button" aria-label="Ampliar foto 8: nosso encontro">
+                            <img src="../../Fotos-nossas/WhatsApp%20Image%202026-10-10%20at%2017.35.26.jpeg" alt="Uma foto nossa de 10 de outubro">
+                        </button>
+                        <figcaption class="carousel-caption">Juntos, do nosso jeito</figcaption>
+                    </figure>
+                    <figure class="carousel-slide" hidden>
+                        <button class="carousel-open" type="button" aria-label="Ampliar foto 9: nosso encontro">
+                            <img src="../../Fotos-nossas/WhatsApp%20Image%202026-10-10%20at%2017.35.27.jpeg" alt="Mais uma foto nossa de 10 de outubro">
+                        </button>
+                        <figcaption class="carousel-caption">E que venham muitas outras lembranças</figcaption>
+                    </figure>
+                    <figure class="carousel-slide" hidden>
+                        <button class="carousel-open" type="button" aria-label="Ampliar foto 10: as três mulheres da minha vida">
+                            <img src="../../Fotos-nossas/Minha%20formatura/Foto%20da%20formatura%20das%20tres%20mulheres%20da%20minha%20vida.jpeg" alt="As três mulheres da minha vida na formatura">
+                        </button>
+                        <figcaption class="carousel-caption">As três mulheres da minha vida</figcaption>
+                    </figure>
+                    <figure class="carousel-slide" hidden>
+                        <button class="carousel-open" type="button" aria-label="Ampliar foto 11: você e Alice">
+                            <img src="../../Fotos-nossas/Minha%20formatura/Meu%20amor%20e%20a%20chatinha%20da%20Alice.jpeg" alt="Meu amor e Alice na formatura">
+                        </button>
+                        <figcaption class="carousel-caption">Você e Alice</figcaption>
+                    </figure>
+                    <figure class="carousel-slide" hidden>
+                        <button class="carousel-open" type="button" aria-label="Ampliar foto 12: juntos na formatura">
+                            <img src="../../Fotos-nossas/Minha%20formatura/WhatsApp%20Image%202026-11-04%20at%2008.52.21.jpeg" alt="Nós dois juntos na formatura">
+                        </button>
+                        <figcaption class="carousel-caption">Juntos na formatura</figcaption>
+                    </figure>
+                    <figure class="carousel-slide" hidden>
+                        <button class="carousel-open" type="button" aria-label="Ampliar foto 13: uma pose na formatura">
+                            <img src="../../Fotos-nossas/Minha%20formatura/WhatsApp%20Image%202026-11-04%20at%2008.52.21%20(1).jpeg" alt="Uma pose nossa na formatura">
+                        </button>
+                        <figcaption class="carousel-caption">Uma pose para guardar</figcaption>
+                    </figure>
+                    <figure class="carousel-slide" hidden>
+                        <button class="carousel-open" type="button" aria-label="Ampliar foto 14: uma lembrança da formatura">
+                            <img src="../../Fotos-nossas/Minha%20formatura/WhatsApp%20Image%202026-11-04%20at%2008.52.21%20(2).jpeg" alt="Nós juntos em mais uma foto da formatura">
+                        </button>
+                        <figcaption class="carousel-caption">Mais uma lembrança da formatura</figcaption>
+                    </figure>
+                    <figure class="carousel-slide" hidden>
+                        <button class="carousel-open" type="button" aria-label="Ampliar foto 15: um retrato da formatura">
+                            <img src="../../Fotos-nossas/Minha%20formatura/WhatsApp%20Image%202026-11-04%20at%2008.52.22.jpeg" alt="Um retrato nosso na formatura">
+                        </button>
+                        <figcaption class="carousel-caption">Um retrato desse dia</figcaption>
+                    </figure>
+                    <figure class="carousel-slide" hidden>
+                        <button class="carousel-open" type="button" aria-label="Ampliar foto 16: juntos nesse dia especial">
+                            <img src="../../Fotos-nossas/Minha%20formatura/WhatsApp%20Image%202026-11-04%20at%2008.52.22%20(1).jpeg" alt="Nós juntos em um dia especial">
+                        </button>
+                        <figcaption class="carousel-caption">Juntos nesse dia especial</figcaption>
+                    </figure>
+                    <figure class="carousel-slide" hidden>
+                        <button class="carousel-open" type="button" aria-label="Ampliar foto 17: nossa lembrança no Chiquinho's">
+                            <img src="../../Fotos-nossas/Encontro%20inesperado%20kkkkk/01-11-2026.Chiquinhos.jpeg" alt="Nossa lembrança no Chiquinho's em 1 de novembro">
+                        </button>
+                        <figcaption class="carousel-caption">Uma lembrança no Chiquinho's</figcaption>
+                    </figure>
+                </div>
+                <div class="carousel-controls" aria-label="Controles do carrossel">
+                    <button class="carousel-control" id="foto-anterior" type="button" aria-label="Mostrar foto anterior">‹</button>
+                    <span class="carousel-count" aria-live="polite">01 / 17</span>
+                    <button class="carousel-control" id="proxima-foto" type="button" aria-label="Mostrar próxima foto">›</button>
+                    <button class="carousel-toggle" id="alternar-apresentacao" type="button" aria-pressed="true">Pausar apresentação</button>
+                </div>
+                <div class="carousel-thumbnails" role="group" aria-label="Escolher uma foto">
+                    <button class="carousel-thumbnail" type="button" aria-label="Mostrar foto 1" aria-current="true"><img src="../../Fotos-nossas/Foto-1.jpeg" alt=""></button>
+                    <button class="carousel-thumbnail" type="button" aria-label="Mostrar foto 2" aria-current="false"><img src="../../Fotos-nossas/WhatsApp%20Image%202026-10-10%20at%2016.46.03.jpeg" alt=""></button>
+                    <button class="carousel-thumbnail" type="button" aria-label="Mostrar foto 3" aria-current="false"><img src="../../Fotos-nossas/WhatsApp%20Image%202026-10-10%20at%2016.46.03%20(1).jpeg" alt=""></button>
+                    <button class="carousel-thumbnail" type="button" aria-label="Mostrar foto 4" aria-current="false"><img src="../../Fotos-nossas/WhatsApp%20Image%202026-10-10%20at%2016.46.03%20(2).jpeg" alt=""></button>
+                    <button class="carousel-thumbnail" type="button" aria-label="Mostrar foto 5" aria-current="false"><img src="../../Fotos-nossas/WhatsApp%20Image%202026-10-10%20at%2016.46.03%20(3).jpeg" alt=""></button>
+                    <button class="carousel-thumbnail" type="button" aria-label="Mostrar foto 6" aria-current="false"><img src="../../Fotos-nossas/WhatsApp%20Image%202026-10-10%20at%2016.46.03%20(4).jpeg" alt=""></button>
+                    <button class="carousel-thumbnail" type="button" aria-label="Mostrar foto 7" aria-current="false"><img src="../../Fotos-nossas/WhatsApp%20Image%202026-10-10%20at%2017.31.16.jpeg" alt=""></button>
+                    <button class="carousel-thumbnail" type="button" aria-label="Mostrar foto 8" aria-current="false"><img src="../../Fotos-nossas/WhatsApp%20Image%202026-10-10%20at%2017.35.26.jpeg" alt=""></button>
+                    <button class="carousel-thumbnail" type="button" aria-label="Mostrar foto 9" aria-current="false"><img src="../../Fotos-nossas/WhatsApp%20Image%202026-10-10%20at%2017.35.27.jpeg" alt=""></button>
+                    <button class="carousel-thumbnail" type="button" aria-label="Mostrar foto 10" aria-current="false"><img src="../../Fotos-nossas/Minha%20formatura/Foto%20da%20formatura%20das%20tres%20mulheres%20da%20minha%20vida.jpeg" alt=""></button>
+                    <button class="carousel-thumbnail" type="button" aria-label="Mostrar foto 11" aria-current="false"><img src="../../Fotos-nossas/Minha%20formatura/Meu%20amor%20e%20a%20chatinha%20da%20Alice.jpeg" alt=""></button>
+                    <button class="carousel-thumbnail" type="button" aria-label="Mostrar foto 12" aria-current="false"><img src="../../Fotos-nossas/Minha%20formatura/WhatsApp%20Image%202026-11-04%20at%2008.52.21.jpeg" alt=""></button>
+                    <button class="carousel-thumbnail" type="button" aria-label="Mostrar foto 13" aria-current="false"><img src="../../Fotos-nossas/Minha%20formatura/WhatsApp%20Image%202026-11-04%20at%2008.52.21%20(1).jpeg" alt=""></button>
+                    <button class="carousel-thumbnail" type="button" aria-label="Mostrar foto 14" aria-current="false"><img src="../../Fotos-nossas/Minha%20formatura/WhatsApp%20Image%202026-11-04%20at%2008.52.21%20(2).jpeg" alt=""></button>
+                    <button class="carousel-thumbnail" type="button" aria-label="Mostrar foto 15" aria-current="false"><img src="../../Fotos-nossas/Minha%20formatura/WhatsApp%20Image%202026-11-04%20at%2008.52.22.jpeg" alt=""></button>
+                    <button class="carousel-thumbnail" type="button" aria-label="Mostrar foto 16" aria-current="false"><img src="../../Fotos-nossas/Minha%20formatura/WhatsApp%20Image%202026-11-04%20at%2008.52.22%20(1).jpeg" alt=""></button>
+                    <button class="carousel-thumbnail" type="button" aria-label="Mostrar foto 17" aria-current="false"><img src="../../Fotos-nossas/Encontro%20inesperado%20kkkkk/01-11-2026.Chiquinhos.jpeg" alt=""></button>
+                </div>
+            </div>
+            <div class="photo-wall" aria-label="Mosaico de lembranças. Selecione uma foto para ampliar.">
+                <div class="photo-wall-column" aria-label="Coluna de fotos 1"></div>
+                <div class="photo-wall-column" aria-label="Coluna de fotos 2"></div>
+                <div class="photo-wall-column" aria-label="Coluna de fotos 3"></div>
+            </div>
+        </section>
+    </main>
+    <footer class="photos-footer">
+        <p>Cada lembrança guarda um pedacinho do que vivemos.</p>
+        <p class="footer-signature">Com carinho, hoje e sempre <span class="footer-heart" aria-hidden="true">♥</span></p>
+    </footer>
+    <div class="photo-lightbox" hidden>
+        <section class="photo-lightbox-panel" role="dialog" aria-modal="true" aria-label="Foto ampliada">
+            <header class="photo-viewer-topbar">
+                <p class="photo-viewer-kicker">UM PEDACINHO DA NOSSA HISTÓRIA</p>
+                <button class="photo-lightbox-close" type="button" aria-label="Fechar foto ampliada">&larr; Voltar</button>
+            </header>
+            <div class="photo-viewer-stage" aria-label="Foto ampliada">
+                <button class="photo-viewer-nav photo-viewer-nav-previous" type="button" aria-label="Ver lembrança anterior">‹</button>
+                <img class="photo-lightbox-image" alt="">
+                <button class="photo-viewer-nav photo-viewer-nav-next" type="button" aria-label="Ver próxima lembrança">›</button>
+            </div>
+            <footer class="photo-viewer-footer">
+                <p class="photo-viewer-caption" aria-live="polite"></p>
+                <span class="photo-viewer-count" aria-label="Número da foto">01 / 17</span>
+                <progress class="photo-viewer-progress" max="17" value="1" aria-label="Progresso das lembranças"></progress>
+            </footer>
+        </section>
+    </div>
+    <script>
+        const lightbox = document.querySelector(".photo-lightbox");
+        const lightboxImage = lightbox.querySelector(".photo-lightbox-image");
+        const closeButton = lightbox.querySelector(".photo-lightbox-close");
+        const viewerCaption = lightbox.querySelector(".photo-viewer-caption");
+        const viewerCount = lightbox.querySelector(".photo-viewer-count");
+        const viewerProgress = lightbox.querySelector(".photo-viewer-progress");
+        const viewerStage = lightbox.querySelector(".photo-viewer-stage");
+        const slides = [...document.querySelectorAll(".carousel-slide")];
+        const thumbnails = [...document.querySelectorAll(".carousel-thumbnail")];
+        const counter = document.querySelector(".carousel-count");
+        const carousel = document.querySelector(".memory-carousel");
+        const botaoApresentacao = document.querySelector("#alternar-apresentacao");
+        let activeIndex = 0;
+        let photoOpener;
+        let temporizadorControles;
+        let temporizadorSlide;
+        let isPlaying = false;
+        let pointerOverCarousel = false;
+        let temporizadorInterface;
+        let focoDoControleDeReproducao = false;
+        let reproducaoSolicitadaPeloUsuario = false;
+
+        const colunasMosaico = [...document.querySelectorAll(".photo-wall-column")];
+        const imagensDoAlbum = slides.map((slide, index) => {
+            const button = slide.querySelector(".carousel-open");
+            const image = button.querySelector("img");
+            const caption = slide.querySelector(".carousel-caption");
+            return {
+                index,
+                src: image.getAttribute("src"),
+                alt: image.alt,
+                caption: caption.textContent.trim(),
+                label: button.getAttribute("aria-label")
+            };
+        });
+
+        const criarCartaoFoto = (foto, duplicado) => {
+            const button = document.createElement("button");
+            button.type = "button";
+            button.className = "photo-memory-card";
+            button.setAttribute("aria-label", foto.label);
+            button.dataset.photoIndex = String(foto.index);
+
+            const image = document.createElement("img");
+            image.src = foto.src;
+            image.alt = duplicado ? "" : foto.alt;
+            image.loading = "lazy";
+            if (duplicado) {
+                button.tabIndex = -1;
+                button.setAttribute("aria-hidden", "true");
+            }
+
+            const caption = document.createElement("span");
+            caption.className = "photo-memory-caption";
+            caption.append(document.createTextNode(foto.caption));
+
+            const heart = document.createElement("span");
+            heart.className = "photo-memory-heart";
+            heart.setAttribute("aria-hidden", "true");
+            heart.textContent = "♥";
+            caption.append(heart);
+            button.append(image, caption);
+            return button;
+        };
+
+        colunasMosaico.forEach((column, columnIndex) => {
+            const track = document.createElement("div");
+            track.className = "photo-wall-track";
+
+            for (let copyIndex = 0; copyIndex < 2; copyIndex += 1) {
+                const sequence = document.createElement("div");
+                sequence.className = "photo-wall-sequence";
+                sequence.setAttribute("aria-hidden", String(copyIndex > 0));
+
+                imagensDoAlbum
+                    .filter((_, index) => index % colunasMosaico.length === columnIndex)
+                    .forEach((foto) => sequence.append(criarCartaoFoto(foto, copyIndex > 0)));
+
+                track.append(sequence);
+            }
+
+            column.append(track);
+        });
+
+        const revelarInterfaceDoCarrossel = () => {
+            document.body.classList.add("carousel-ui-visible");
+            window.clearTimeout(temporizadorInterface);
+            if (!window.matchMedia("(hover: none), (pointer: coarse)").matches) {
+                temporizadorInterface = window.setTimeout(() => {
+                    document.body.classList.remove("carousel-ui-visible");
+                }, 1000);
+            }
+        };
+
+        document.addEventListener("pointermove", revelarInterfaceDoCarrossel, { passive: true });
+        document.addEventListener("pointerdown", revelarInterfaceDoCarrossel, { passive: true });
+        document.addEventListener("keydown", revelarInterfaceDoCarrossel);
+
+        const atualizarApresentacao = () => {
+            window.clearTimeout(temporizadorSlide);
+            botaoApresentacao.textContent = isPlaying
+                ? "Pausar apresentação"
+                : "Iniciar apresentação";
+            botaoApresentacao.setAttribute("aria-pressed", String(isPlaying));
+
+            if (
+                !isPlaying
+                || (
+                    carousel.contains(document.activeElement)
+                    && !focoDoControleDeReproducao
+                    && !reproducaoSolicitadaPeloUsuario
+                )
+                || !lightbox.hidden
+                || document.hidden
+            ) {
+                return;
+            }
+
+            temporizadorSlide = window.setTimeout(() => {
+                showPhoto(activeIndex + 1);
+                atualizarApresentacao();
+            }, 2500);
+        };
+
+        const showPhoto = (index, direction) => {
+            const nextIndex = (index + slides.length) % slides.length;
+            if (nextIndex === activeIndex && slides[activeIndex] && !slides[activeIndex].hidden) return;
+
+            if (direction === undefined) {
+                const forwardDistance = (nextIndex - activeIndex + slides.length) % slides.length;
+                const backwardDistance = (activeIndex - nextIndex + slides.length) % slides.length;
+                direction = forwardDistance <= backwardDistance ? 1 : -1;
+            }
+
+            activeIndex = nextIndex;
+            slides.forEach((slide, slideIndex) => {
+                slide.hidden = slideIndex !== activeIndex;
+                thumbnails[slideIndex].setAttribute(
+                    "aria-current",
+                    String(slideIndex === activeIndex)
+                );
+            });
+            const activeSlide = slides[activeIndex];
+            activeSlide.style.setProperty("--slide-offset", direction > 0 ? "3rem" : "-3rem");
+            activeSlide.classList.remove("is-sliding");
+            void activeSlide.offsetWidth;
+            activeSlide.classList.add("is-sliding");
+            counter.textContent = `${String(activeIndex + 1).padStart(2, "0")} / ${String(slides.length).padStart(2, "0")}`;
+            if (!lightbox.hidden) atualizarFotoAmpliada(direction);
+            const faixaMiniaturas = thumbnails[activeIndex].parentElement;
+            const deslocamentoMiniatura = thumbnails[activeIndex].offsetLeft - faixaMiniaturas.offsetLeft;
+            faixaMiniaturas.scrollTo({
+                left: Math.max(
+                    0,
+                    deslocamentoMiniatura - (faixaMiniaturas.clientWidth - thumbnails[activeIndex].clientWidth) / 2
+                ),
+                behavior: "smooth"
+            });
+        };
+
+        const atualizarFotoAmpliada = (direction = 1) => {
+            const activeSlide = slides[activeIndex];
+            const image = activeSlide.querySelector("img");
+            const caption = activeSlide.querySelector(".carousel-caption");
+            lightboxImage.classList.remove("is-entering-next", "is-entering-previous");
+            lightboxImage.src = image.src;
+            lightboxImage.alt = image.alt;
+            viewerCaption.textContent = caption.textContent.trim();
+            viewerCount.textContent = `${String(activeIndex + 1).padStart(2, "0")} / ${String(slides.length).padStart(2, "0")}`;
+            viewerProgress.max = slides.length;
+            viewerProgress.value = activeIndex + 1;
+            viewerProgress.setAttribute(
+                "aria-label",
+                `Lembrança ${activeIndex + 1} de ${slides.length}`
+            );
+            viewerStage.style.setProperty("--viewer-image", `url("${image.src}")`);
+            void lightboxImage.offsetWidth;
+            lightboxImage.classList.add(direction > 0 ? "is-entering-next" : "is-entering-previous");
+        };
+
+        const mostrarBotaoVoltar = () => {
+            lightbox.classList.add("is-controls-visible");
+            window.clearTimeout(temporizadorControles);
+            if (!window.matchMedia("(hover: none), (pointer: coarse)").matches) {
+                temporizadorControles = window.setTimeout(() => {
+                    lightbox.classList.remove("is-controls-visible");
+                }, 2200);
+            }
+        };
+
+        const abrirFoto = (button) => {
+            const photoIndex = Number(button.dataset.photoIndex);
+            const slideIndex = slides.indexOf(button.closest(".carousel-slide"));
+            if (Number.isInteger(photoIndex) && photoIndex >= 0 && photoIndex < slides.length) {
+                showPhoto(photoIndex);
+            } else if (slideIndex >= 0) {
+                showPhoto(slideIndex);
+            }
+            photoOpener = button;
+            lightbox.hidden = false;
+            atualizarFotoAmpliada();
+            mostrarBotaoVoltar();
+            document.body.classList.add("photo-lightbox-open");
+            atualizarApresentacao();
+            closeButton.focus();
+        };
+
+        document.querySelector("#foto-anterior").addEventListener("click", () => {
+            showPhoto(activeIndex - 1, -1);
+            atualizarApresentacao();
+        });
+
+        document.querySelector("#proxima-foto").addEventListener("click", () => {
+            showPhoto(activeIndex + 1, 1);
+            atualizarApresentacao();
+        });
+
+        thumbnails.forEach((thumbnail, index) => {
+            thumbnail.addEventListener("click", () => {
+                showPhoto(index);
+                atualizarApresentacao();
+            });
+        });
+
+        botaoApresentacao.addEventListener("click", () => {
+            isPlaying = !isPlaying;
+            focoDoControleDeReproducao = isPlaying;
+            reproducaoSolicitadaPeloUsuario = isPlaying;
+            atualizarApresentacao();
+        });
+
+        carousel.addEventListener("pointerenter", () => {
+            pointerOverCarousel = true;
+            reproducaoSolicitadaPeloUsuario = false;
+            atualizarApresentacao();
+        });
+
+        carousel.addEventListener("pointerleave", () => {
+            pointerOverCarousel = false;
+            reproducaoSolicitadaPeloUsuario = false;
+            atualizarApresentacao();
+        });
+
+        carousel.addEventListener("focusin", () => {
+            focoDoControleDeReproducao = false;
+            reproducaoSolicitadaPeloUsuario = false;
+            atualizarApresentacao();
+        });
+
+        carousel.addEventListener("focusout", () => {
+            window.setTimeout(atualizarApresentacao, 0);
+        });
+
+        document.addEventListener("visibilitychange", atualizarApresentacao);
+
+        const closeLightbox = () => {
+            window.clearTimeout(temporizadorControles);
+            lightbox.classList.remove("is-controls-visible");
+            lightbox.hidden = true;
+            document.body.classList.remove("photo-lightbox-open");
+            lightboxImage.removeAttribute("src");
+            if (photoOpener) photoOpener.focus();
+            atualizarApresentacao();
+        };
+
+        document.querySelectorAll(".carousel-open").forEach((button) => {
+            button.addEventListener("click", () => abrirFoto(button));
+        });
+
+        document.querySelector(".photo-wall").addEventListener("click", (event) => {
+            const card = event.target.closest(".photo-memory-card");
+            if (!card || !event.currentTarget.contains(card)) return;
+
+            showPhoto(Number(card.dataset.photoIndex));
+            abrirFoto(card);
+        });
+
+        closeButton.addEventListener("click", closeLightbox);
+        lightbox.querySelector(".photo-viewer-nav-previous").addEventListener("click", () => {
+            showPhoto(activeIndex - 1, -1);
+            mostrarBotaoVoltar();
+        });
+        lightbox.querySelector(".photo-viewer-nav-next").addEventListener("click", () => {
+            showPhoto(activeIndex + 1, 1);
+            mostrarBotaoVoltar();
+        });
+
+        lightbox.addEventListener("pointermove", mostrarBotaoVoltar, { passive: true });
+        lightbox.addEventListener("pointerdown", mostrarBotaoVoltar, { passive: true });
+
+        lightbox.addEventListener("click", (event) => {
+            if (event.target === lightbox) closeLightbox();
+        });
+
+        document.addEventListener("keydown", (event) => {
+            if (lightbox.hidden) return;
+            if (event.key === "Escape") {
+                closeLightbox();
+            } else if (event.key === "ArrowLeft") {
+                event.preventDefault();
+                showPhoto(activeIndex - 1, -1);
+            } else if (event.key === "ArrowRight") {
+                event.preventDefault();
+                showPhoto(activeIndex + 1, 1);
+            }
+        });
+
+        let inicioToque;
+        viewerStage.addEventListener("touchstart", (event) => {
+            inicioToque = event.changedTouches[0].clientX;
+        }, { passive: true });
+
+        viewerStage.addEventListener("touchend", (event) => {
+            if (inicioToque === undefined) return;
+            const deslocamento = event.changedTouches[0].clientX - inicioToque;
+            if (Math.abs(deslocamento) > 45) {
+                const direction = deslocamento < 0 ? 1 : -1;
+                showPhoto(activeIndex + direction, direction);
+            }
+            inicioToque = undefined;
+        }, { passive: true });
+
+        carousel.addEventListener("touchstart", (event) => {
+            inicioToque = event.changedTouches[0].clientX;
+        }, { passive: true });
+
+        carousel.addEventListener("touchend", (event) => {
+            if (inicioToque === undefined) return;
+            const deslocamento = event.changedTouches[0].clientX - inicioToque;
+            if (Math.abs(deslocamento) > 45) {
+                const direction = deslocamento < 0 ? 1 : -1;
+                showPhoto(activeIndex + direction, direction);
+                atualizarApresentacao();
+            }
+            inicioToque = undefined;
+        }, { passive: true });
+
+        carousel.addEventListener("keydown", (event) => {
+            if (event.key === "ArrowLeft") {
+                event.preventDefault();
+                showPhoto(activeIndex - 1, -1);
+                atualizarApresentacao();
+            } else if (event.key === "ArrowRight") {
+                event.preventDefault();
+                showPhoto(activeIndex + 1, 1);
+                atualizarApresentacao();
+            }
+        });
+
+        revelarInterfaceDoCarrossel();
+        showPhoto(0);
+        atualizarApresentacao();
+    </script>
+    <script src="../../assets/js/brand-doodles.js" defer></script>
+</body>
+</html>

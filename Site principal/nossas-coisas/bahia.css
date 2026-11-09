@@ -1,0 +1,1036 @@
+.bahia-body {
+    --bahia-blue: #123c74;
+    --bahia-red: #c9273b;
+    --bahia-ink: #253047;
+    --bahia-muted: #5b6575;
+    --bahia-paper: #fbf8f2;
+    padding-bottom: 2rem;
+    background-color: #eef2f7;
+    background-image:
+        radial-gradient(ellipse at left top, rgba(18, 60, 116, 0.12), transparent 34rem),
+        radial-gradient(ellipse at right bottom, rgba(201, 39, 59, 0.1), transparent 36rem),
+        linear-gradient(rgba(243, 247, 252, 0.78), rgba(243, 247, 252, 0.78)),
+        url("../../imagens/Bahia.png");
+    background-position: left top, right bottom, center, center;
+    background-repeat: no-repeat, no-repeat, no-repeat, no-repeat;
+    background-attachment: scroll, scroll, fixed, fixed;
+    background-size: auto, auto, auto, min(62vw, 320px) auto;
+    color: var(--bahia-ink);
+}
+
+.bahia-body::before,
+.bahia-body::after {
+    background-image:
+        url("../../imagens/bahia-icone-pagina.png"),
+        url("../../imagens/bahia-icone-pagina.png");
+    background-repeat: no-repeat, no-repeat;
+    background-position: left 1.5rem top 8rem, right 1.5rem bottom 8rem;
+    background-size: clamp(72px, 10vw, 120px) auto, clamp(72px, 10vw, 120px) auto;
+    opacity: 0.075;
+}
+
+.bahia-body::after {
+    background-image:
+        linear-gradient(90deg, transparent, var(--bahia-blue) 18%, var(--bahia-blue) 34%, #fff 34%, #fff 66%, var(--bahia-red) 66%, var(--bahia-red) 82%, transparent),
+        linear-gradient(90deg, transparent, var(--bahia-blue) 18%, var(--bahia-blue) 34%, #fff 34%, #fff 66%, var(--bahia-red) 66%, var(--bahia-red) 82%, transparent);
+    background-repeat: no-repeat, no-repeat;
+    background-position: center top 0.15rem, center bottom 0.15rem;
+    background-size: min(360px, 64vw) 6px, min(360px, 64vw) 6px;
+    opacity: 0.22;
+}
+
+.bahia-body .menu-romantico {
+    border-color: rgba(18, 60, 116, 0.22);
+    background: rgba(251, 248, 242, 0.96);
+}
+
+.bahia-body .menu-romantico .indicador {
+    background: var(--bahia-blue);
+}
+
+.bahia-body .menu-romantico a,
+.bahia-body .menu-romantico .menu-trigger {
+    color: var(--bahia-blue);
+}
+
+.bahia-body .menu-romantico a:hover,
+.bahia-body .menu-romantico a:focus-visible {
+    color: #fff;
+}
+
+.bahia-page {
+    width: min(100% - 2rem, 1040px);
+    margin: 0 auto;
+    padding: 1.25rem 0 3rem;
+}
+
+.bahia-hero {
+    position: relative;
+    overflow: hidden;
+    display: grid;
+    justify-items: center;
+    margin: 1.5rem 0 1.5rem;
+    padding: clamp(2rem, 7vw, 4.75rem) clamp(1rem, 5vw, 3rem) 3.5rem;
+    border: 1px solid rgba(18, 60, 116, 0.15);
+    border-radius: 30px;
+    background:
+        radial-gradient(ellipse at 50% 0%, rgba(255, 255, 255, 0.9), transparent 48%),
+        linear-gradient(145deg, #fffdf9 0%, #f5f0e9 55%, #e9eef5 100%);
+    box-shadow: 0 14px 34px rgba(38, 47, 64, 0.1);
+    text-align: center;
+}
+
+.bahia-hero::before,
+.bahia-hero::after {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    width: 12px;
+    content: "";
+    opacity: 0.92;
+}
+
+.bahia-hero::before {
+    left: 0;
+    background-image: repeating-linear-gradient(180deg, var(--bahia-blue) 0 11%, #fff 11% 13%, var(--bahia-red) 13% 24%, var(--bahia-blue) 24% 33.333%);
+    background-size: 100% 300%;
+    animation: bahia-border-vertical 5.5s linear infinite;
+}
+
+.bahia-hero::after {
+    right: 0;
+    background-image: repeating-linear-gradient(180deg, var(--bahia-red) 0 11%, #fff 11% 13%, var(--bahia-blue) 13% 24%, var(--bahia-red) 24% 33.333%);
+    background-size: 100% 300%;
+    animation: bahia-border-vertical 5.5s linear infinite reverse;
+}
+
+.bahia-eyebrow {
+    margin: 0 0 0.65rem;
+    color: var(--bahia-red);
+    font-size: 0.72rem;
+    font-weight: 800;
+    letter-spacing: 0.17em;
+    line-height: 1.5;
+    text-transform: uppercase;
+}
+
+.bahia-hero > .bahia-eyebrow {
+    position: relative;
+    z-index: 1;
+    margin-bottom: 1.1rem;
+}
+
+.bahia-crest-image {
+    display: block;
+    width: clamp(5.5rem, 12vw, 6.75rem);
+    height: auto;
+    margin: 0 auto 0.8rem;
+    filter: drop-shadow(0 4px 4px rgba(18, 60, 116, 0.13));
+}
+
+.bahia-hero h1 {
+    margin: 0;
+    padding: 0;
+    background: none;
+    box-shadow: none;
+    color: var(--bahia-blue);
+    font-family: Georgia, "Times New Roman", serif;
+    font-size: clamp(2.7rem, 10vw, 5.5rem);
+    line-height: 0.98;
+    text-shadow: none;
+}
+
+.bahia-deck {
+    max-width: 43rem;
+    margin: 1.1rem auto 0;
+    color: #455064;
+    font-family: Georgia, "Times New Roman", serif;
+    font-size: clamp(1.05rem, 3vw, 1.28rem);
+    line-height: 1.65;
+}
+
+.bahia-bbmp {
+    position: relative;
+    isolation: isolate;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 0.35rem 0.7rem;
+    width: fit-content;
+    max-width: calc(100% - 1.5rem);
+    margin: 1.05rem auto 0;
+    padding: 0.65rem 1.05rem;
+    border: 1px solid transparent;
+    border-radius: 999px;
+    background:
+        linear-gradient(120deg, #102e59, #183f78) padding-box,
+        linear-gradient(110deg, #168bff, #ff3155, #168bff) border-box;
+    box-shadow: 0 0 9px rgba(22, 139, 255, 0.35), 0 0 12px rgba(255, 49, 85, 0.3);
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: clamp(0.98rem, 3.5vw, 1.28rem);
+    font-weight: 850;
+    line-height: 1.25;
+}
+
+.bahia-bbmp > * {
+    position: relative;
+    z-index: 2;
+}
+
+.bahia-bbmp::after {
+    position: absolute;
+    z-index: 3;
+    top: -35%;
+    bottom: -35%;
+    left: 0;
+    width: 22%;
+    background: linear-gradient(100deg, transparent, rgba(255, 255, 255, 0.15) 28%, rgba(255, 255, 255, 0.9) 50%, rgba(255, 255, 255, 0.15) 72%, transparent);
+    content: "";
+    filter: blur(1px);
+    pointer-events: none;
+    transform: translateX(-180%) skewX(-20deg);
+    animation: bahia-bbmp-shine 3.6s ease-in-out infinite;
+}
+
+.bahia-bbmp-acronym {
+    display: inline-flex;
+    gap: 0.02em;
+    font-size: 1.12em;
+    font-weight: 950;
+    letter-spacing: 0.1em;
+}
+
+.bahia-bbmp-phrase {
+    min-width: 0;
+    text-align: center;
+}
+
+.bahia-bbmp-divider {
+    color: rgba(255, 255, 255, 0.65);
+}
+
+.chant-white {
+    color: #fff;
+    text-shadow: 0 0 8px rgba(255, 255, 255, 0.7);
+}
+
+.chant-blue {
+    color: #55c2ff;
+    text-shadow: 0 0 9px rgba(85, 194, 255, 0.8);
+}
+
+.chant-red {
+    color: #ff627a;
+    text-shadow: 0 0 9px rgba(255, 98, 122, 0.78);
+}
+
+@keyframes bahia-bbmp-shine {
+    0%, 16% { transform: translateX(-180%) skewX(-20deg); }
+    72%, 100% { transform: translateX(650%) skewX(-20deg); }
+}
+
+.bahia-hero-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.6rem;
+    margin-top: 1.5rem;
+    padding: 0.75rem 1.05rem;
+    border: 1px solid rgba(18, 60, 116, 0.25);
+    border-radius: 999px;
+    background: rgba(255, 255, 255, 0.72);
+    color: var(--bahia-blue);
+    font-size: 0.92rem;
+    font-weight: 750;
+    text-decoration: none;
+    transition: transform 180ms ease, background-color 180ms ease;
+}
+
+.bahia-hero-link:hover,
+.bahia-hero-link:focus-visible {
+    background: #fff;
+    transform: translateY(-2px);
+}
+
+.bahia-ribbon {
+    position: absolute;
+    right: -0.5rem;
+    bottom: 0;
+    left: -0.5rem;
+    height: 0.5rem;
+    background-image: repeating-linear-gradient(90deg, var(--bahia-blue) 0 11%, #fff 11% 13%, var(--bahia-red) 13% 24%, var(--bahia-blue) 24% 33.333%);
+    background-size: 300% 100%;
+    animation: bahia-border-horizontal 6.5s linear infinite;
+}
+
+.bahia-ribbon span {
+    display: none;
+}
+
+@keyframes bahia-border-vertical {
+    from { background-position: 0 0; }
+    to { background-position: 0 100%; }
+}
+
+@keyframes bahia-border-horizontal {
+    from { background-position: 0 0; }
+    to { background-position: 100% 0; }
+}
+
+.bahia-facts {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 0.75rem;
+    margin: 0 0 3rem;
+}
+
+.bahia-facts article {
+    display: grid;
+    align-content: center;
+    min-height: 7.5rem;
+    padding: 1rem;
+    border: 1px solid rgba(18, 60, 116, 0.13);
+    border-radius: 16px;
+    background: rgba(255, 253, 249, 0.86);
+    text-align: center;
+}
+
+.bahia-facts article > span {
+    color: var(--bahia-red);
+    font-size: 0.68rem;
+    font-weight: 800;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+}
+
+.bahia-facts strong {
+    margin-top: 0.3rem;
+    color: var(--bahia-blue);
+    font-family: Georgia, "Times New Roman", serif;
+    font-size: clamp(1.05rem, 2.7vw, 1.35rem);
+}
+
+.bahia-facts small {
+    margin-top: 0.15rem;
+    color: var(--bahia-muted);
+    font-size: 0.78rem;
+}
+
+.bahia-section {
+    margin: 2rem 0;
+    padding: clamp(1.15rem, 4vw, 2.3rem);
+    border: 1px solid rgba(18, 60, 116, 0.13);
+    border-radius: 22px;
+    background: rgba(255, 253, 249, 0.91);
+    box-shadow: 0 9px 25px rgba(38, 47, 64, 0.07);
+}
+
+.bahia-section-heading {
+    max-width: 48rem;
+    margin: 0 auto 1.8rem;
+    text-align: center;
+}
+
+.bahia-section-heading h2,
+.bahia-song-section h2,
+.bahia-heart-section h2 {
+    margin: 0;
+    padding: 0;
+    background: none;
+    box-shadow: none;
+    color: var(--bahia-blue);
+    font-family: Georgia, "Times New Roman", serif;
+    font-size: clamp(1.8rem, 5vw, 2.8rem);
+    line-height: 1.13;
+}
+
+.bahia-section-heading > p:last-child {
+    max-width: 43rem;
+    margin: 0.8rem auto 0;
+    color: var(--bahia-muted);
+    font-family: Georgia, "Times New Roman", serif;
+    font-size: 1.04rem;
+    line-height: 1.65;
+}
+
+.bahia-timeline {
+    position: relative;
+    display: grid;
+    gap: 0.85rem;
+    max-width: 49rem;
+    margin: 0 auto;
+    padding: 0 0 0 1.7rem;
+    list-style: none;
+    text-align: left;
+}
+
+.bahia-timeline::before {
+    position: absolute;
+    top: 0.4rem;
+    bottom: 0.4rem;
+    left: 0.47rem;
+    width: 2px;
+    background: linear-gradient(var(--bahia-blue), #b6c5d9 60%, var(--bahia-red));
+    content: "";
+}
+
+.bahia-timeline li {
+    position: relative;
+    display: grid;
+    grid-template-columns: 5.2rem minmax(0, 1fr);
+    gap: 0.75rem;
+    padding: 0.95rem 1.05rem;
+    border-radius: 14px;
+    background: #f2f5f8;
+}
+
+.bahia-timeline li::before {
+    position: absolute;
+    top: 1.15rem;
+    left: -1.58rem;
+    width: 0.55rem;
+    height: 0.55rem;
+    border: 2px solid #fffdf9;
+    border-radius: 50%;
+    background: var(--bahia-red);
+    box-shadow: 0 0 0 1px rgba(18, 60, 116, 0.18);
+    content: "";
+}
+
+.bahia-timeline time {
+    padding-top: 0.1rem;
+    color: var(--bahia-red);
+    font-size: 0.85rem;
+    font-weight: 800;
+}
+
+.bahia-timeline h3,
+.bahia-idol-card h3,
+.bahia-identity-grid h3 {
+    margin: 0;
+    padding: 0;
+    background: none;
+    box-shadow: none;
+    color: var(--bahia-blue);
+    font-family: Georgia, "Times New Roman", serif;
+    font-size: 1.18rem;
+    text-align: left;
+}
+
+.bahia-timeline p,
+.bahia-idol-card p,
+.bahia-identity-grid p {
+    margin: 0.35rem 0 0;
+    color: #4c5869;
+    font-size: 0.94rem;
+    line-height: 1.62;
+    text-align: left;
+}
+
+.bahia-trophy-grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 0.9rem;
+}
+
+.bahia-trophy-card {
+    display: grid;
+    align-content: start;
+    justify-items: center;
+    min-height: 12.5rem;
+    padding: 1.3rem 1rem;
+    border: 1.5px solid transparent;
+    border-radius: 17px;
+    background:
+        linear-gradient(145deg, #fffdfb, #f3f6fa) padding-box,
+        linear-gradient(135deg, #ff3155, #168bff) border-box;
+    box-shadow: 0 0 7px rgba(255, 49, 85, 0.3), 0 0 12px rgba(22, 139, 255, 0.24), 0 8px 18px rgba(23, 41, 67, 0.1);
+    text-align: center;
+    transition: transform 180ms ease, box-shadow 180ms ease;
+}
+
+.bahia-trophy-card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 0 10px rgba(255, 49, 85, 0.45), 0 0 18px rgba(22, 139, 255, 0.38), 0 12px 22px rgba(23, 41, 67, 0.14);
+}
+
+.bahia-trophy-highlight {
+    background:
+        linear-gradient(145deg, #fff9f5, #f7e9e7) padding-box,
+        linear-gradient(135deg, #ff3155, #168bff) border-box;
+}
+
+.trophy-icon {
+    color: #c08d2b;
+    font-size: 1.65rem;
+    line-height: 1;
+}
+
+.bahia-trophy-card > p {
+    margin: 0.65rem 0 0.2rem;
+    color: var(--bahia-red);
+    font-size: 0.68rem;
+    font-weight: 800;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+}
+
+.bahia-trophy-card h3 {
+    margin: 0;
+    padding: 0;
+    background: none;
+    box-shadow: none;
+    color: var(--bahia-blue);
+    font-family: Georgia, "Times New Roman", serif;
+    font-size: 1.1rem;
+    text-align: center;
+}
+
+.bahia-trophy-card strong {
+    margin-top: 0.45rem;
+    color: var(--bahia-ink);
+    font-size: 1.15rem;
+}
+
+.bahia-trophy-card small {
+    margin-top: 0.15rem;
+    color: var(--bahia-muted);
+    font-size: 0.76rem;
+    line-height: 1.45;
+}
+
+.bahia-other-titles {
+    margin-top: 1rem;
+    border: 1px solid rgba(18, 60, 116, 0.15);
+    border-radius: 14px;
+    background: #fff;
+}
+
+.bahia-other-titles summary {
+    padding: 0.95rem 1rem;
+    color: var(--bahia-blue);
+    font-weight: 750;
+    cursor: pointer;
+}
+
+.bahia-other-titles summary:focus-visible {
+    outline: 2px solid var(--bahia-red);
+    outline-offset: 3px;
+}
+
+.other-titles-content {
+    padding: 0 1rem 1rem;
+}
+
+.other-titles-content p {
+    margin: 0.55rem 0;
+    color: #4c5869;
+    font-size: 0.91rem;
+    line-height: 1.6;
+    text-align: left;
+}
+
+.other-titles-content strong {
+    color: var(--bahia-blue);
+}
+
+.bahia-title-note {
+    margin: 0.75rem 0 0;
+    color: var(--bahia-muted);
+    font-size: 0.78rem;
+    line-height: 1.5;
+    text-align: center;
+}
+
+.bahia-idol-grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 0.85rem;
+}
+
+.bahia-idol-card {
+    min-height: 10rem;
+    padding: 1.05rem;
+    border-left: 3px solid var(--bahia-red);
+    border-radius: 0 14px 14px 0;
+    background: linear-gradient(120deg, #f2f5f8, #fbfaf7);
+}
+
+.idol-era {
+    display: block;
+    margin-bottom: 0.4rem;
+    color: #8a5660;
+    font-size: 0.66rem;
+    font-weight: 800;
+    letter-spacing: 0.11em;
+    text-transform: uppercase;
+}
+
+.bahia-song-section {
+    display: grid;
+    grid-template-columns: 5rem minmax(0, 1fr);
+    gap: 1.25rem;
+    align-items: start;
+    margin: 2rem 0;
+    padding: clamp(1.25rem, 4vw, 2.2rem);
+    border-radius: 22px;
+    background: linear-gradient(130deg, var(--bahia-blue), #1e4e88 65%, #30415a);
+    box-shadow: 0 10px 28px rgba(18, 60, 116, 0.2);
+    color: #fff;
+}
+
+.song-mark {
+    display: grid;
+    place-items: center;
+    width: 4.5rem;
+    height: 4.5rem;
+    border: 1px solid rgba(255, 255, 255, 0.35);
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.12);
+    color: #fff;
+    font-family: Georgia, "Times New Roman", serif;
+    font-size: 2.4rem;
+}
+
+.bahia-song-section .bahia-eyebrow {
+    color: #f4c9cf;
+}
+
+.bahia-song-section h2 {
+    color: #fff;
+}
+
+.bahia-song-section > div:last-child > p:not(.bahia-eyebrow) {
+    max-width: 48rem;
+    margin: 0.75rem 0 0;
+    color: rgba(255, 255, 255, 0.9);
+    font-family: Georgia, "Times New Roman", serif;
+    font-size: 1.02rem;
+    line-height: 1.65;
+    text-align: left;
+}
+
+.bahia-song-section > div:last-child > .song-caption {
+    color: #dae6f5;
+    font-family: inherit;
+    font-size: 0.88rem;
+}
+
+.bahia-song-links {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 0.65rem;
+    margin-top: 1rem;
+}
+
+.bahia-song-links a {
+    display: grid;
+    gap: 0.2rem;
+    padding: 0.8rem 0.9rem;
+    border: 1px solid rgba(255, 255, 255, 0.24);
+    border-radius: 13px;
+    background: rgba(255, 255, 255, 0.09);
+    color: #fff;
+    text-decoration: none;
+    transition: background-color 180ms ease, transform 180ms ease;
+}
+
+.bahia-song-links a:hover,
+.bahia-song-links a:focus-visible {
+    background: rgba(255, 255, 255, 0.17);
+    transform: translateY(-2px);
+}
+
+.bahia-song-links a:focus-visible {
+    outline: 2px solid #fff;
+    outline-offset: 2px;
+}
+
+.bahia-song-links strong {
+    font-size: 0.9rem;
+}
+
+.bahia-song-links span {
+    color: #dbe5f2;
+    font-size: 0.76rem;
+    line-height: 1.45;
+}
+
+.bahia-terrace-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 0.85rem;
+}
+
+.bahia-terrace-card {
+    position: relative;
+    display: grid;
+    align-content: start;
+    gap: 0.48rem;
+    min-height: 10.5rem;
+    padding: 1.15rem 1.15rem 1rem 1.3rem;
+    overflow: hidden;
+    border: 1px solid rgba(18, 60, 116, 0.14);
+    border-radius: 16px;
+    background: linear-gradient(145deg, #f4f7fa, #fffaf6);
+    color: var(--bahia-ink);
+    text-decoration: none;
+    transition: transform 180ms ease, box-shadow 180ms ease, border-color 180ms ease;
+}
+
+.bahia-terrace-card::before {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    width: 4px;
+    background: linear-gradient(var(--bahia-blue) 0 50%, var(--bahia-red) 50%);
+    content: "";
+}
+
+.bahia-terrace-card:hover,
+.bahia-terrace-card:focus-visible {
+    border-color: rgba(18, 60, 116, 0.32);
+    box-shadow: 0 9px 20px rgba(18, 60, 116, 0.12);
+    transform: translateY(-2px);
+}
+
+.bahia-terrace-card:focus-visible {
+    outline: 2px solid var(--bahia-red);
+    outline-offset: 3px;
+}
+
+.terrace-card-label {
+    color: var(--bahia-red);
+    font-size: 0.66rem;
+    font-weight: 800;
+    letter-spacing: 0.11em;
+    text-transform: uppercase;
+}
+
+.bahia-terrace-card strong {
+    color: var(--bahia-blue);
+    font-family: Georgia, "Times New Roman", serif;
+    font-size: 1.18rem;
+}
+
+.bahia-terrace-card > span:nth-of-type(2) {
+    color: #4c5869;
+    font-size: 0.88rem;
+    line-height: 1.55;
+}
+
+.terrace-card-action {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.45rem;
+    margin-top: 0.2rem;
+    color: var(--bahia-blue);
+    font-size: 0.82rem;
+    font-weight: 800;
+}
+
+.bahia-identity-grid {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 0.85rem;
+}
+
+.bahia-identity-grid article {
+    padding: 1.1rem;
+    border-radius: 15px;
+    background: #f2f5f8;
+}
+
+.identity-symbol {
+    display: block;
+    margin-bottom: 0.65rem;
+    font-size: 1.5rem;
+}
+
+.bahia-heart-section {
+    position: relative;
+    overflow: hidden;
+    margin: 2.5rem 0;
+    padding: clamp(1.7rem, 5vw, 3.3rem);
+    border: 1px solid rgba(201, 39, 59, 0.2);
+    border-radius: 24px;
+    background: linear-gradient(145deg, #fffaf7, #f4f0e9 58%, #e9eef5);
+    box-shadow: 0 12px 28px rgba(38, 47, 64, 0.09);
+    text-align: center;
+}
+
+.bahia-heart-section::after {
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 7px;
+    height: 100%;
+    background: linear-gradient(var(--bahia-blue) 0 33%, #fff 33% 66%, var(--bahia-red) 66%);
+    content: "";
+}
+
+.bahia-heart-section h2 {
+    max-width: 42rem;
+    margin: 0 auto;
+    color: #713543;
+}
+
+.heart-copy {
+    max-width: 45rem;
+    margin: 1.3rem auto 0;
+    padding: clamp(1rem, 3vw, 1.6rem);
+    border: 1px solid rgba(201, 39, 59, 0.13);
+    border-radius: 16px;
+    background: rgba(255, 255, 255, 0.72);
+}
+
+.heart-copy p {
+    margin: 0 0 0.9rem;
+    color: #3e4858;
+    font-family: Georgia, "Times New Roman", serif;
+    font-size: 1.04rem;
+    line-height: 1.8;
+    text-align: left;
+}
+
+.heart-copy p:last-child {
+    margin-bottom: 0;
+}
+
+.heart-copy .heart-closing {
+    color: #713543;
+    font-weight: 700;
+}
+
+.bahia-family-quote {
+    margin: 0 0 1.2rem;
+    padding: 1rem 1.15rem;
+    border: 1.5px solid transparent;
+    border-radius: 14px;
+    background:
+        linear-gradient(145deg, #fff, #f8f9fc) padding-box,
+        linear-gradient(120deg, #168bff, #ff3155) border-box;
+    box-shadow: 0 0 7px rgba(22, 139, 255, 0.2), 0 0 9px rgba(255, 49, 85, 0.18);
+}
+
+.heart-copy .bahia-family-quote p {
+    margin: 0 0 0.5rem;
+    color: var(--bahia-blue);
+    font-size: clamp(1.05rem, 2.5vw, 1.2rem);
+    font-style: italic;
+    text-align: center;
+}
+
+.bahia-family-quote cite {
+    display: block;
+    color: var(--bahia-muted);
+    font-size: 0.8rem;
+    font-style: normal;
+    text-align: right;
+}
+
+.bahia-sources {
+    padding: 1.25rem 0;
+    text-align: center;
+}
+
+.bahia-sources h2 {
+    margin: 0;
+    padding: 0;
+    background: none;
+    box-shadow: none;
+    color: var(--bahia-blue);
+    font-family: Georgia, "Times New Roman", serif;
+    font-size: 1.45rem;
+}
+
+.bahia-sources > p {
+    margin: 0.4rem auto 0.9rem;
+    color: var(--bahia-muted);
+    font-size: 0.85rem;
+}
+
+.bahia-sources > div {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 0.5rem;
+}
+
+.bahia-sources a {
+    display: inline-block;
+    padding: 0.52rem 0.75rem;
+    border: 1px solid rgba(18, 60, 116, 0.16);
+    border-radius: 999px;
+    background: rgba(255, 253, 249, 0.8);
+    color: var(--bahia-blue);
+    font-size: 0.78rem;
+    font-weight: 700;
+    text-decoration: none;
+}
+
+.bahia-sources a:hover,
+.bahia-sources a:focus-visible {
+    border-color: var(--bahia-blue);
+    background: white;
+}
+
+.bahia-footer {
+    margin-top: 1rem;
+    padding-top: 1rem;
+    border-top: 1px solid rgba(18, 60, 116, 0.15);
+    text-align: center;
+}
+
+.bahia-footer a {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: fit-content;
+    max-width: 100%;
+    margin: 0 auto;
+    padding: 0.7rem 1.25rem;
+    border: 1px solid rgba(18, 60, 116, 0.2);
+    border-bottom: 3px solid var(--bahia-red);
+    border-radius: 999px;
+    background: var(--bahia-blue);
+    color: #fff;
+    font-weight: 800;
+    text-decoration: none;
+    box-shadow: 0 5px 14px rgba(18, 60, 116, 0.18);
+    transition: transform 180ms ease, box-shadow 180ms ease, filter 180ms ease;
+}
+
+.bahia-footer a:hover,
+.bahia-footer a:focus-visible {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 18px rgba(18, 60, 116, 0.24);
+    filter: brightness(1.06);
+}
+
+.bahia-footer a:focus-visible {
+    outline: 3px solid var(--bahia-blue);
+    outline-offset: 3px;
+}
+
+.bahia-footer p {
+    margin: 0.6rem 0 0;
+    color: var(--bahia-muted);
+    font-family: Georgia, "Times New Roman", serif;
+    font-size: 0.9rem;
+}
+
+.bahia-footer p span {
+    color: var(--bahia-red);
+}
+
+@media (max-width: 760px) {
+    .bahia-facts {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .bahia-idol-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .bahia-identity-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+}
+
+@media (max-width: 540px) {
+    .bahia-page {
+        width: min(100% - 1rem, 1040px);
+        padding-top: 0.65rem;
+    }
+
+    .bahia-hero {
+        margin-top: 1rem;
+        border-radius: 22px;
+    }
+
+    .bahia-facts article {
+        min-height: 6.75rem;
+        padding: 0.75rem 0.45rem;
+    }
+
+    .bahia-facts small {
+        font-size: 0.7rem;
+    }
+
+    .bahia-section {
+        border-radius: 17px;
+    }
+
+    .bahia-timeline {
+        padding-left: 1.35rem;
+    }
+
+    .bahia-timeline::before {
+        left: 0.35rem;
+    }
+
+    .bahia-timeline li {
+        grid-template-columns: 1fr;
+        gap: 0.2rem;
+        padding: 0.85rem;
+    }
+
+    .bahia-timeline li::before {
+        left: -1.25rem;
+    }
+
+    .bahia-trophy-grid,
+    .bahia-idol-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .bahia-song-links {
+        grid-template-columns: 1fr;
+    }
+
+    .bahia-terrace-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .bahia-trophy-card {
+        min-height: auto;
+    }
+
+    .bahia-song-section {
+        grid-template-columns: 1fr;
+        gap: 0.85rem;
+        border-radius: 17px;
+    }
+
+    .song-mark {
+        width: 3.5rem;
+        height: 3.5rem;
+        font-size: 1.9rem;
+    }
+
+    .bahia-identity-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .heart-copy p {
+        font-size: 0.98rem;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .bahia-hero::before,
+    .bahia-hero::after,
+    .bahia-ribbon {
+        animation: none;
+    }
+
+    .bahia-hero-link,
+    .bahia-song-links a,
+    .bahia-terrace-card,
+    .bahia-bbmp::after {
+        animation: none;
+    }
+}

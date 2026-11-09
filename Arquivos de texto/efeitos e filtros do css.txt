@@ -1,0 +1,30 @@
+filter: grayscale(1);        /* preto e branco */
+filter: sepia(1);             /* tom sépia */
+filter: blur(2px);            /* desfoque */
+filter: contrast(1.3);        /* contraste */
+filter: saturate(1.5);        /* intensidade das cores */
+filter: hue-rotate(45deg);    /* muda os tons */
+filter: invert(1);            /* inverte as cores */
+filter: opacity(0.6);         /* transparência */
+
+
+
+-Para remover linha dos Botoes com links-
+a:hover,
+a:focus-visible {
+    text-decoration: none;
+
+
+-efeitos 3d dos botões-
+
+Usei a regra geral a para preparar todos os links: ela define uma transição suave e transform-style: preserve-3d. Quando o mouse passa sobre um link, ou ele recebe foco pelo teclado, esta regra aplica o efeito:
+
+
+rotateX dá a inclinação 3D, translateY eleva o botão, scale o aumenta, box-shadow cria o brilho e brightness clareia. A transição definida em a suaviza a mudança. Não alterei arquivos nesta resposta.
+
+-Icone do lado do titulo da pagina-
+
+<meta charset="UTF-8">
+<link rel="icon" type="image/png" href="imagens/iconhellokitty.png">
+
+-

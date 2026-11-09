@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#171116">
+    <link rel="stylesheet" href="../../assets/css/InterfaceProjeto-Leticia.css">
+    <link rel="stylesheet" href="../../assets/css/menu-romantico.css">
+    <link rel="stylesheet" href="../../assets/css/series-universe.css">
+    <script src="../../assets/js/cursor-romantico.js" defer></script>
+    <script src="../../assets/js/menu-romantico.js" defer></script>
+    <title>Suas séries favoritas</title>
+    <link rel="stylesheet" href="../../assets/css/brand-doodles.css">
+    <link rel="stylesheet" href="../../assets/css/progresso-site.css">
+    <script src="../../assets/js/progresso-site.js" defer></script>
+    <link rel="stylesheet" href="../../assets/css/identidade-visual.css">
+</head>
+<body class="series-gallery" data-cursor-symbol="📺">
+    <nav class="menu-romantico" aria-label="Navegação desta seção">
+        <span class="indicador" aria-hidden="true"></span>
+        <div class="menu-item"><a href="Botoes.html">Voltar</a></div>
+        <div class="menu-item">
+            <button class="menu-trigger" type="button">Outros favoritos</button>
+            <div class="submenu" aria-label="Outras coisas favoritas">
+                <a href="SeusFilmesfavoritos.html">Filmes favoritos</a>
+                <a href="suasmusicasfavoritas.html">Músicas favoritas</a>
+            </div>
+        </div>
+    </nav>
+
+    <main class="series-gallery-main">
+        <header class="series-gallery-hero">
+            <p class="series-eyebrow">Seu cantinho de maratonas</p>
+            <h1>Séries favoritas</h1>
+            <p>Histórias para maratonar, personagens para acompanhar e universos que continuam com a gente depois que o episódio termina.</p>
+            <span class="series-gallery-emblem" aria-hidden="true">✦ <span>PLAY</span> ✦</span>
+        </header>
+
+        <div class="series-gallery-tabs" role="tablist" aria-label="Categorias de séries">
+            <button class="series-gallery-tab" id="tab-series-favorites" type="button" role="tab" aria-selected="true" aria-controls="panel-series-favorites" tabindex="0">Favoritas</button>
+            <button class="series-gallery-tab" id="tab-series-liked" type="button" role="tab" aria-selected="false" aria-controls="panel-series-liked" tabindex="-1">Séries que você gosta</button>
+        </div>
+
+        <section class="series-gallery-panel" id="panel-series-favorites" role="tabpanel" aria-labelledby="tab-series-favorites">
+            <div class="series-gallery-grid" aria-label="Séries favoritas">
+                <a class="series-show-card show-supernatural" href="../../supernatural/supernatural.html">
+                    <span class="series-show-art series-show-art--cover" aria-hidden="true"><img class="series-show-cover" src="../../imagens/supernaturalcapa1.jpeg" alt=""><span class="series-art-caption">a estrada nunca termina</span></span>
+                    <span class="series-show-copy">
+                        <span class="series-card-kicker">CAÇADA · FAMÍLIA · SOBRENATURAL</span>
+                        <strong>Supernatural</strong>
+                        <span>Dois irmãos, estradas sem fim e lendas que ganham vida.</span>
+                        <span class="series-card-link">Entrar neste universo <span aria-hidden="true">↗</span></span>
+                    </span>
+                </a>
+                <a class="series-show-card show-vampire-diaries" href="../../Diario%20de%20um%20vampiro/diariodeumvampiro.html">
+                    <span class="series-show-art series-show-art--cover" aria-hidden="true"><img class="series-show-cover" src="../../imagens/capatemporada1.png" alt=""><span class="series-art-caption">segredos em Mystic Falls</span></span>
+                    <span class="series-show-copy">
+                        <span class="series-card-kicker">VAMPIROS · BRUXAS · ESCOLHAS</span>
+                        <strong>The Vampire Diaries</strong>
+                        <span>Um diário, dois irmãos vampiros e uma cidade cheia de segredos.</span>
+                        <span class="series-card-link">Entrar neste universo <span aria-hidden="true">↗</span></span>
+                    </span>
+                </a>
+                <a class="series-show-card show-originals" href="../../The%20Originals/the-originals.html">
+                    <span class="series-show-art series-show-art--cover" aria-hidden="true"><img class="series-show-cover" src="../../imagens/capa-the-originals.png" alt=""><span class="series-art-caption">a família é poder</span></span>
+                    <span class="series-show-copy">
+                        <span class="series-card-kicker">FAMÍLIA · PODER · NOVA ORLEANS</span>
+                        <strong>The Originals</strong>
+                        <span>Uma família antiga. Uma cidade que nunca esquece.</span>
+                        <span class="series-card-link">Entrar neste universo <span aria-hidden="true">↗</span></span>
+                    </span>
+                </a>
+            </div>
+        </section>
+
+        <section class="series-gallery-panel" id="panel-series-liked" role="tabpanel" aria-labelledby="tab-series-liked" hidden>
+            <div class="series-gallery-grid" aria-label="Séries que você gosta">
+                <a class="series-show-card show-modern-family" href="series/modern-family.html">
+                    <span class="series-show-art" aria-hidden="true"><span class="series-show-symbol">🏠</span><span class="series-art-caption">família, do nosso jeito</span></span>
+                    <span class="series-show-copy">
+                        <span class="series-card-kicker">COMÉDIA · FAMÍLIA · AFETO</span>
+                        <strong>Modern Family</strong>
+                        <span>Três casas, muitas confusões e uma família que cresce junta.</span>
+                        <span class="series-card-link">Conhecer a série <span aria-hidden="true">↗</span></span>
+                    </span>
+                </a>
+                <a class="series-show-card show-greys-anatomy" href="series/greys-anatomy.html">
+                    <span class="series-show-art" aria-hidden="true"><span class="series-show-symbol">🩺</span><span class="series-art-caption">entre a vida e o coração</span></span>
+                    <span class="series-show-copy">
+                        <span class="series-card-kicker">MEDICINA · AMIZADE · DRAMA</span>
+                        <strong>Grey’s Anatomy</strong>
+                        <span>Plantões intensos, vínculos profundos e decisões que mudam vidas.</span>
+                        <span class="series-card-link">Conhecer a série <span aria-hidden="true">↗</span></span>
+                    </span>
+                </a>
+            </div>
+        </section>
+
+        <footer class="series-gallery-footer">
+            <span aria-hidden="true">♡</span>
+            <p>Escolha sua próxima maratona e aproveite cada episódio.</p>
+            <a href="Botoes.html">Voltar para nossas coisas</a>
+        </footer>
+    </main>
+    <script>
+        const tabsSeries = [...document.querySelectorAll('[role="tab"]')];
+        const panelsSeries = tabsSeries.map(tab => document.getElementById(tab.getAttribute("aria-controls")));
+
+        function ativarAbaSeries(tabAtiva, moverFoco = false) {
+            tabsSeries.forEach((tab, indice) => {
+                const selecionada = tab === tabAtiva;
+                tab.setAttribute("aria-selected", String(selecionada));
+                tab.tabIndex = selecionada ? 0 : -1;
+                panelsSeries[indice].hidden = !selecionada;
+            });
+            if (moverFoco) tabAtiva.focus();
+        }
+
+        tabsSeries.forEach((tab, indice) => {
+            tab.addEventListener("click", () => ativarAbaSeries(tab));
+            tab.addEventListener("keydown", evento => {
+                let proximoIndice = indice;
+                if (evento.key === "ArrowRight") proximoIndice = (indice + 1) % tabsSeries.length;
+                else if (evento.key === "ArrowLeft") proximoIndice = (indice - 1 + tabsSeries.length) % tabsSeries.length;
+                else if (evento.key === "Home") proximoIndice = 0;
+                else if (evento.key === "End") proximoIndice = tabsSeries.length - 1;
+                else return;
+                evento.preventDefault();
+                ativarAbaSeries(tabsSeries[proximoIndice], true);
+            });
+        });
+
+        const abaInicial = tabsSeries.find(tab => `#${tab.getAttribute("aria-controls")}` === window.location.hash);
+        if (abaInicial) ativarAbaSeries(abaInicial);
+    </script>
+    <script src="../../assets/js/brand-doodles.js" defer></script>
+</body>
+</html>

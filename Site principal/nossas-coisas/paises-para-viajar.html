@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#f4f2ec">
+    <meta name="description" content="A Entre Nós Viagens transforma sonhos a dois em destinos no nosso mapa do mundo.">
+    <title>Entre Nós Viagens | Uma agência de sonhos a dois</title>
+    <link rel="stylesheet" href="../../assets/css/InterfaceProjeto-Leticia.css">
+    <link rel="stylesheet" href="../../assets/css/menu-romantico.css">
+    <link rel="stylesheet" href="../../assets/css/progresso-site.css">
+    <link rel="stylesheet" href="paises-para-viajar.css">
+    <script src="../../assets/js/menu-romantico.js" defer></script>
+    <script src="paises-para-viajar.js" defer></script>
+    <script src="../../assets/js/cursor-viagem.js" defer></script>
+    <script src="../../assets/js/progresso-site.js" defer></script>
+    <link rel="stylesheet" href="../../assets/css/identidade-visual.css">
+</head>
+<body class="world-travel-body">
+    <nav class="menu-romantico" aria-label="Navegação da agência Entre Nós Viagens">
+        <span class="indicador" aria-hidden="true"></span>
+        <div class="menu-item"><a href="viagens.html">Viagem à Itália</a></div>
+        <div class="menu-item"><a href="#destinos">Catálogo</a></div>
+        <div class="menu-item"><a href="#nosso-roteiro">Nosso pacote</a></div>
+    </nav>
+
+    <main class="world-travel-page">
+        <header class="world-hero">
+            <div class="world-hero-copy">
+                <a class="agency-wordmark" href="#inicio" aria-label="Entre Nós Viagens — início">
+                    <span class="agency-mark" aria-hidden="true">E<span>N</span></span>
+                    <span class="agency-name">ENTRE NÓS <small>VIAGENS</small></span>
+                </a>
+                <p class="world-eyebrow"><span aria-hidden="true">✦</span> Agência particular de sonhos a dois</p>
+                <h1>Seu amor é o destino.<br><span>O mundo, o caminho.</span></h1>
+                <p class="world-deck">Bem-vindos à agência de viagens mais nossa do mundo. Aqui, cada país é um convite, cada plano vira roteiro e o melhor lugar é sempre aquele onde a gente está junto.</p>
+                <a class="world-button" href="#destinos">Encontrar nossa próxima viagem <span aria-hidden="true">↓</span></a>
+                <p class="agency-signature"><span aria-hidden="true">✳</span> Roteiros feitos com carinho, para Letícia &amp; companhia.</p>
+            </div>
+            <div class="world-globe-scene" aria-hidden="true">
+                <div class="world-sun"></div>
+                <div class="world-globe"><span class="globe-land land-one"></span><span class="globe-land land-two"></span><span class="globe-land land-three"></span><span class="globe-heart">♡</span></div>
+                <span class="globe-star star-one">✦</span>
+                <span class="globe-star star-two">✧</span>
+                <span class="globe-route" aria-hidden="true"></span>
+                <span class="globe-caption">Seu lugar favorito é ao meu lado</span>
+                <span class="agency-stamp">AGÊNCIA<br>DE NÓS DOIS</span>
+            </div>
+            <div class="world-ribbon" aria-hidden="true"><span></span><span></span><span></span></div>
+        </header>
+
+            <section class="world-intro" aria-label="Os serviços da Entre Nós Viagens">
+            <article><span aria-hidden="true">✧</span><strong>Curadoria de sonhos</strong><small>Destinos especiais escolhidos para inspirar a nossa próxima história.</small></article>
+            <article><span aria-hidden="true">♡</span><strong>Planejamento a dois</strong><small>Um roteiro compartilhado que cresce com cada ideia nossa.</small></article>
+            <article><span aria-hidden="true">✈</span><strong>Memórias sem fronteiras</strong><small>Marque as viagens vividas e guarde os destinos que ainda vêm.</small></article>
+        </section>
+
+        <section class="world-section" id="destinos" aria-labelledby="destinations-title">
+            <div class="world-section-heading">
+                <p class="world-kicker">Vitrine de destinos · coleção especial para dois</p>
+                <h2 id="destinations-title">Qual sonho vamos colocar no mapa?</h2>
+                <p>Uma seleção de lugares inesquecíveis para inspirar a nossa próxima aventura. Encontrou um que combina com a gente? Reserve esse sonho para o nosso roteiro.</p>
+            </div>
+            <div class="country-search">
+                <label for="country-search">Pesquisar na nossa vitrine</label>
+                <input id="country-search" type="search" placeholder="Busque um país ou continente" autocomplete="off">
+            </div>
+            <p class="country-count" aria-live="polite"></p>
+            <div class="country-grid" aria-label="Países para conhecer"></div>
+            <p class="country-empty" hidden>Nenhum país encontrado. Tente outro nome ou continente.</p>
+        </section>
+
+        <section class="world-section itinerary-section" id="nosso-roteiro" aria-labelledby="itinerary-title">
+            <div class="world-section-heading">
+                <p class="world-kicker">Reserva afetiva · sem data para expirar</p>
+                <h2 id="itinerary-title">Nosso pacote de sonhos</h2>
+                <p>A Itália já tem lugar garantido no nosso coração. Os outros destinos são planos abertos para escolher, trocar e sonhar sempre juntos.</p>
+            </div>
+            <div class="itinerary-summary" aria-live="polite"></div>
+            <ul class="itinerary-list" aria-labelledby="itinerary-title"></ul>
+            <p class="itinerary-empty" hidden>Ainda não adicionamos destinos. Escolha um país acima e comece o nosso roteiro.</p>
+            <p class="itinerary-status" role="status" aria-live="polite"></p>
+            <form class="custom-country-form">
+                <label for="custom-country">Não encontrou o destino perfeito? Nossa agência aceita pedidos especiais:</label>
+                <div class="custom-country-row">
+                    <input id="custom-country" name="country" type="text" maxlength="60" placeholder="Escreva o nome do país" required>
+                    <button class="world-button" type="submit">Incluir no nosso roteiro <span aria-hidden="true">＋</span></button>
+                </div>
+            </form>
+        </section>
+
+        <aside class="world-note">
+            <span aria-hidden="true">♡</span>
+            <p>Pacote ilimitado de sonhos, passeios sem pressa e memórias para a vida inteira — sempre com você.</p>
+            <a href="viagens.html">E começar pela Itália <span aria-hidden="true">→</span></a>
+        </aside>
+
+        <footer class="world-footer">
+            <p>Entre Nós Viagens · o mundo é enorme, mas nossos planos começam de mãos dadas. <span aria-hidden="true">♥</span></p>
+        </footer>
+    </main>
+    <script src="../../assets/js/brand-doodles.js" defer data-edge-only="true"></script>
+</body>
+</html>

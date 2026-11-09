@@ -1,0 +1,390 @@
+.memories-page {
+    max-width: 900px;
+    padding: 1rem 0 3rem;
+}
+
+.memories-intro {
+    margin: 2rem auto 2.5rem;
+}
+
+.memories-eyebrow {
+    margin: 0 0 0.5rem;
+    color: #9c4967;
+    font-size: 0.75rem;
+    font-weight: bold;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+}
+
+.memories-intro h1 {
+    margin: 0;
+    font-size: clamp(2rem, 7vw, 3.5rem);
+}
+
+.memories-intro > p:last-child,
+.section-lead {
+    max-width: 42rem;
+    margin: 1rem auto 0;
+    font-family: Georgia, "Times New Roman", serif;
+    font-size: 1.08rem;
+}
+
+.memory-section {
+    margin: 2.5rem 0;
+    padding: clamp(1rem, 4vw, 2rem);
+    border: 1px solid rgba(156, 73, 103, 0.22);
+    border-radius: 20px;
+    background: rgba(255, 248, 250, 0.92);
+    box-shadow: 0 8px 22px rgba(99, 59, 77, 0.12);
+}
+
+.memory-section > h2 {
+    margin: 0 auto 1.5rem;
+}
+
+.timeline {
+    position: relative;
+    display: grid;
+    gap: 1.25rem;
+    margin: 0;
+    padding: 0 0 0 1.5rem;
+    list-style: none;
+    text-align: left;
+}
+
+.timeline::before {
+    position: absolute;
+    top: 0.6rem;
+    bottom: 0.6rem;
+    left: 0.35rem;
+    width: 2px;
+    background: #edb8ca;
+    content: "";
+}
+
+.timeline-item {
+    position: relative;
+    padding: 1rem 1.1rem;
+    border-radius: 14px;
+    background: #fff1f5;
+}
+
+.timeline-item::before {
+    position: absolute;
+    top: 1.25rem;
+    left: -1.53rem;
+    width: 0.65rem;
+    height: 0.65rem;
+    border: 2px solid #fff8fa;
+    border-radius: 50%;
+    background: #9c4967;
+    content: "";
+}
+
+.timeline-item time,
+.timeline-period,
+.memory-card-label,
+.capsule-date {
+    color: #9c4967;
+    font-size: 0.8rem;
+    font-weight: bold;
+    letter-spacing: 0.04em;
+}
+
+.timeline-period {
+    display: block;
+}
+
+.timeline-item h3,
+.memory-card h3,
+.playlist-track h3 {
+    margin: 0.35rem 0;
+    padding: 0;
+    background: none;
+    box-shadow: none;
+    color: #633b4d;
+    font-family: Georgia, "Times New Roman", serif;
+    font-size: 1.2rem;
+    text-align: left;
+}
+
+.timeline-item p,
+.memory-card p,
+.playlist-track p {
+    margin: 0.45rem 0 0.75rem;
+    text-align: left;
+}
+
+.timeline-item a {
+    font-weight: bold;
+}
+
+.memory-cards {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, 14rem), 1fr));
+    gap: 1rem;
+}
+
+.memory-card {
+    padding: 1.1rem;
+    border: 1px solid rgba(156, 73, 103, 0.15);
+    border-radius: 15px;
+    background: #fff1f5;
+    text-align: left;
+}
+
+.memory-card .memory-card-label {
+    margin: 0;
+}
+
+.plans-list {
+    display: grid;
+    gap: 0.75rem;
+    margin: 1.5rem 0 0;
+    padding: 0;
+    list-style: none;
+    text-align: left;
+}
+
+.plans-list li {
+    padding: 0;
+    border-radius: 12px;
+    background: #fff1f5;
+}
+
+.plans-list label {
+    display: flex;
+    align-items: flex-start;
+    gap: 0.8rem;
+    padding: 0.85rem 1rem;
+    border-radius: 12px;
+    cursor: pointer;
+}
+
+.plans-list input {
+    width: 1.15rem;
+    height: 1.15rem;
+    flex: 0 0 auto;
+    margin: 0.2rem 0 0;
+    accent-color: #9c4967;
+    cursor: pointer;
+}
+
+.plans-list input:focus-visible {
+    outline: 2px solid #9c4967;
+    outline-offset: 3px;
+}
+
+.plans-list input:checked + span {
+    color: #805567;
+    text-decoration: line-through;
+    text-decoration-color: #c987a0;
+}
+
+.plans-status {
+    min-height: 1.5em;
+    margin: 0.75rem 0 0;
+    color: #9c4967;
+    font-size: 0.9rem;
+}
+
+.travel-italy {
+    position: relative;
+    overflow: hidden;
+    background: linear-gradient(145deg, #fff8fa, #fce6ed);
+}
+
+.travel-italy > h2 {
+    margin: 0.35rem auto 1rem;
+}
+
+.travel-italy > p:not(.memories-eyebrow) {
+    max-width: 46rem;
+    margin: 0.9rem auto;
+    font-family: Georgia, "Times New Roman", serif;
+    font-size: 1.08rem;
+    line-height: 1.75;
+}
+
+.travel-flag {
+    display: block;
+    margin-bottom: 0.75rem;
+    font-size: 3rem;
+}
+
+.travel-list {
+    display: grid;
+    gap: 0.75rem;
+    margin: 1.5rem 0 0;
+    padding: 0;
+    list-style: none;
+    text-align: left;
+}
+
+.travel-destination {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    padding: 0.85rem 1rem;
+    border-radius: 12px;
+    background: #fff1f5;
+}
+
+.travel-destination label {
+    display: flex;
+    align-items: center;
+    gap: 0.8rem;
+    cursor: pointer;
+}
+
+.travel-destination input {
+    width: 1.15rem;
+    height: 1.15rem;
+    margin: 0;
+    accent-color: #9c4967;
+}
+
+.travel-destination input:focus-visible,
+.travel-remove-button:focus-visible,
+.travel-form input:focus-visible {
+    outline: 2px solid #9c4967;
+    outline-offset: 3px;
+}
+
+.travel-country-name {
+    font-weight: bold;
+}
+
+.travel-destination.is-visited .travel-country-name {
+    color: #805567;
+    text-decoration: line-through;
+    text-decoration-color: #c987a0;
+}
+
+.travel-remove-button {
+    padding: 0.4rem 0.65rem;
+    border: 1px solid rgba(156, 73, 103, 0.3);
+    border-radius: 8px;
+    background: #fff8fa;
+    color: #805567;
+    cursor: pointer;
+}
+
+.travel-form {
+    display: grid;
+    gap: 0.75rem;
+    margin-top: 1.5rem;
+    text-align: left;
+}
+
+.travel-form > label {
+    font-weight: bold;
+}
+
+.travel-form-controls {
+    display: flex;
+    gap: 0.75rem;
+}
+
+.travel-form input {
+    min-width: 0;
+    flex: 1;
+    padding: 0.75rem 0.9rem;
+    border: 1px solid rgba(156, 73, 103, 0.35);
+    border-radius: 10px;
+    background: #fff;
+    color: #633b4d;
+    font: inherit;
+}
+
+.travel-add-button {
+    border: 0;
+    cursor: pointer;
+    font: inherit;
+}
+
+.travel-page > .continue-link {
+    margin-top: 0.5rem;
+}
+
+.time-capsule {
+    border-color: rgba(156, 73, 103, 0.36);
+    background: linear-gradient(145deg, #fff8fa, #fce6ed);
+}
+
+.capsule-locked,
+.capsule-open {
+    max-width: 42rem;
+    margin: 0 auto;
+    padding: 1rem 1.25rem;
+    border: 1px dashed #c987a0;
+    border-radius: 15px;
+    background: rgba(255, 255, 255, 0.65);
+    font-family: Georgia, "Times New Roman", serif;
+    font-size: 1.05rem;
+}
+
+.capsule-open p {
+    text-align: left;
+}
+
+.capsule-open p:last-child {
+    margin-bottom: 0;
+}
+
+.playlist {
+    display: grid;
+    gap: 1rem;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+.playlist-track {
+    display: grid;
+    gap: 0.75rem;
+    padding: 1rem;
+    border-radius: 15px;
+    background: #fff1f5;
+    text-align: left;
+}
+
+.playlist-track .track-artist {
+    margin: 0;
+    color: #805567;
+    font-size: 0.9rem;
+    font-weight: bold;
+}
+
+.playlist-track audio {
+    width: 100%;
+}
+
+.playlist-status {
+    min-height: 1.5em;
+    margin: 1rem 0 0;
+    color: #9c4967;
+}
+
+@media (max-width: 600px) {
+    .memories-page {
+        padding-top: 0.5rem;
+    }
+
+    .timeline {
+        padding-left: 1.25rem;
+    }
+
+    .timeline-item::before {
+        left: -1.28rem;
+    }
+
+    .travel-form-controls {
+        flex-direction: column;
+    }
+
+    .travel-add-button {
+        text-align: center;
+    }
+}

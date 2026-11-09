@@ -1,0 +1,59 @@
+const formulario = document.getElementById("formulario-frete");
+const resultado = document.getElementById("resultado");
+
+const lerCampos = () => Object.fromEntries([...formulario.elements]
+    .filter((campo) => campo.id)
+    .map((campo) => [campo.id, campo.type === "number" ? Number(campo.value) : campo.value.trim()]));
+
+const dinheiro = (valor) => `R$ ${valor.toFixed(2)}`;
+
+const mostrarResultado = (campos, calculo) => {
+    resultado.hidden = false;
+    resultado.innerHTML = `
+        <h2>Resumo do Frete</h2>
+        Cliente: ${campos.cliente}<br>
+        Origem: ${campos.origem}<br>
+        Destino: ${campos.destino}<br>
+        Mercadoria: ${campos.produto}<br><br>
+        Distância: ${campos.distancia} km<br>
+        Volumes: ${campos.volumes}<br>
+        Cubagem: ${calculo.cubagem.toFixed(2)} m³<br>
+        Peso real: ${campos.peso.toFixed(2)} kg<br>
+        Peso cubado: ${calculo.pesoCubado.toFixed(2)} kg<br>
+        Peso considerado: ${calculo.pesoConsiderado.toFixed(2)} kg<br>
+        Critério: ${calculo.pesoCubado > campos.peso ? "Peso cubado" : "Peso real"}<br><br>
+        Frete-peso: ${dinheiro(calculo.fretePeso)}<br>
+        Frete mínimo aplicado: ${calculo.minimoAplicado ? "Sim" : "Não"}<br>
+        Ad Valorem: ${dinheiro(calculo.adValorem)}<br>
+        GRIS: ${dinheiro(calculo.gris)}<br>
+        Pedágio: ${dinheiro(campos.pedagio)}<br><br>
+        <strong>Total do frete: ${dinheiro(calculo.total)}</strong>
+    `;
+};
+
+const calcular = (event) => {
+    event.preventDefault();
+    if (!formulario.checkValidity()) {
+        formulario.reportValidity();
+        return;
+    }
+
+    const campos = lerCampos();
+    const cubagem = campos.comprimento * campos.largura * campos.altura * campos.volumes / 1000000;
+    const pesoCubado = cubagem * 300;
+    const pesoConsiderado = Math.max(campos.peso, pesoCubado);
+    const freteCalculado = pesoConsiderado * campos.tarifa;
+    const minimoAplicado = freteCalculado < campos.freteMinimo;
+    const fretePeso = minimoAplicado ? campos.freteMinimo : freteCalculado;
+    const adValorem = campos.nota * campos.adValorem / 100;
+    const gris = campos.nota * campos.gris / 100;
+    const total = fretePeso + adValorem + gris + campos.pedagio;
+
+    mostrarResultado(campos, { cubagem, pesoCubado, pesoConsiderado, fretePeso, minimoAplicado, adValorem, gris, total });
+};
+
+formulario.addEventListener("submit", calcular);
+formulario.addEventListener("reset", () => {
+    resultado.hidden = true;
+    resultado.innerHTML = "";
+});

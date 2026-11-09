@@ -1,0 +1,300 @@
+/* Tema musical inspirado em players de streaming: carvão, verde e cartões de faixa. */
+html:has(body.spotify-music-body) { overflow-x: clip; }
+
+body.spotify-music-body {
+    --player-green: #1ed760;
+    --player-deep: #0b2418;
+    --player-panel: #1d2720;
+    --player-card: #263229;
+    --player-text: #f5f7f5;
+    --player-muted: #b5c0b8;
+    min-height: 100vh;
+    margin: 0;
+    padding: 0;
+    overflow-x: hidden;
+    background: radial-gradient(ellipse at 50% -10%, #244d31, transparent 45rem), linear-gradient(145deg, #0d1711, #101a14 58%, #0b1510);
+    color: var(--player-text);
+    font-family: "Segoe UI", Arial, sans-serif;
+}
+
+body.spotify-music-body::before {
+    position: fixed;
+    z-index: 0;
+    inset: 0;
+    background: repeating-linear-gradient(135deg, transparent 0 190px, rgba(255,255,255,.9) 190px 202px, transparent 202px 392px);
+    content: "";
+    opacity: .18;
+    pointer-events: none;
+}
+
+body.spotify-music-body::after { display: none; content: none; }
+body.spotify-music-body > :not(.music-cursor) { position: relative; z-index: 1; }
+
+body.spotify-music-body .menu-romantico {
+    top: .65rem;
+    border: 1px solid rgba(255,255,255,.14);
+    background: rgba(24,34,27,.94);
+    box-shadow: 0 10px 26px rgba(0,0,0,.3);
+    backdrop-filter: blur(16px);
+}
+
+body.spotify-music-body .menu-romantico .indicador { background: #1ed760; }
+body.spotify-music-body .menu-romantico a,
+body.spotify-music-body .menu-romantico .menu-trigger { color: #e6eee8; }
+body.spotify-music-body .menu-romantico a:hover,
+body.spotify-music-body .menu-romantico a:focus-visible,
+body.spotify-music-body .menu-romantico .menu-trigger:hover,
+body.spotify-music-body .menu-romantico .menu-trigger:focus-visible,
+body.spotify-music-body .menu-romantico .menu-item.is-active > a,
+body.spotify-music-body .menu-romantico .menu-item.is-active > .menu-trigger { color: #092014; }
+body.spotify-music-body .menu-romantico a:focus-visible,
+body.spotify-music-body .menu-romantico .menu-trigger:focus-visible { outline: 2px solid #1ed760; outline-offset: 3px; }
+body.spotify-music-body .menu-romantico .submenu { border-color: rgba(255,255,255,.14); background: #1c271f; }
+body.spotify-music-body .menu-romantico .submenu a { color: #edf3ee; }
+body.spotify-music-body .menu-romantico .submenu a:hover,
+body.spotify-music-body .menu-romantico .submenu a:focus-visible { background: #26392c; color: #1ed760; }
+body.spotify-music-body .love-doodle,
+body.spotify-music-body .love-doodle::before,
+body.spotify-music-body .love-doodle::after { color: #67e995; }
+body.spotify-music-body .love-doodle { text-shadow: 0 1px 0 rgba(7,20,12,.95), 0 2px 6px rgba(0,0,0,.5); }
+
+body.spotify-music-body main {
+    width: min(100% - 2rem, 1100px);
+    max-width: 1100px;
+    margin: 2rem auto;
+    color: var(--player-text);
+}
+
+body.spotify-music-body main > section,
+body.spotify-music-body .memory-section {
+    margin: 1.5rem 0;
+    padding: clamp(1.15rem, 4vw, 2.25rem);
+    border: 1px solid rgba(255,255,255,.1);
+    border-radius: 22px;
+    background: linear-gradient(145deg, rgba(31,42,34,.97), rgba(23,32,26,.97));
+    box-shadow: 0 16px 35px rgba(0,0,0,.22);
+    color: var(--player-text);
+}
+
+body.spotify-music-body main h1,
+body.spotify-music-body main h2,
+body.spotify-music-body main h3 {
+    background: none;
+    box-shadow: none;
+    color: #f7faf7;
+    font-family: Georgia, "Times New Roman", serif;
+}
+
+body.spotify-music-body main h1 { margin: .3rem 0 .55rem; font-size: clamp(2rem, 5vw, 3.2rem); }
+body.spotify-music-body main > section > p,
+body.spotify-music-body .memories-intro > p:last-child,
+body.spotify-music-body .memory-section > p { color: var(--player-muted); line-height: 1.7; }
+
+body.spotify-music-body .memories-page { width: min(100% - 2rem, 1100px); margin: 1.5rem auto; padding: 0; }
+body.spotify-music-body .memories-intro {
+    position: relative;
+    overflow: hidden;
+    margin: 1.2rem 0 1.5rem;
+    padding: clamp(1.5rem, 5vw, 3.25rem);
+    border: 1px solid rgba(255,255,255,.14);
+    border-radius: 25px;
+    background: repeating-linear-gradient(135deg, transparent 0 145px, rgba(255,255,255,.07) 145px 149px, transparent 149px 294px), linear-gradient(125deg, #183b27, #101a14 80%);
+    box-shadow: 0 18px 38px rgba(0,0,0,.28);
+    color: var(--player-text);
+}
+body.spotify-music-body .memories-eyebrow { color: #1ed760; font-size: .72rem; font-weight: 900; letter-spacing: .15em; text-transform: uppercase; }
+body.spotify-music-body .memories-intro h1 { color: #fff; font: clamp(2.5rem, 8vw, 4.7rem)/1 Georgia,"Times New Roman",serif; }
+body.spotify-music-body .memories-intro > p:last-child { max-width: 48rem; }
+body.spotify-music-body .memory-section > h2 { margin: 0 0 1rem; font-size: clamp(1.45rem, 4vw, 2rem); }
+
+body.spotify-music-body .music-list.favorite-song-list {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: .8rem;
+    margin: 1.2rem 0 0;
+    padding: 0;
+    list-style: none;
+}
+
+body.spotify-music-body .music-list.favorite-song-list > li,
+body.spotify-music-body .playlist-track {
+    position: relative;
+    min-width: 0;
+    padding: 1rem;
+    border: 1px solid rgba(255,255,255,.09);
+    border-radius: 16px;
+    background: var(--player-card);
+    color: var(--player-text);
+    box-shadow: 0 8px 18px rgba(0,0,0,.14);
+    transition: background-color 160ms ease, transform 160ms ease;
+}
+
+body.spotify-music-body .music-list.favorite-song-list > li:hover,
+body.spotify-music-body .playlist-track:hover { transform: translateY(-2px); background: #2c3a30; }
+body.spotify-music-body .dedicated-song-card h2,
+body.spotify-music-body .add-song-slot h2 { margin: 0 0 .8rem; color: #fff; font: 1.12rem/1.3 Georgia,"Times New Roman",serif; }
+body.spotify-music-body .dedicated-playback-controls { display: grid; gap: .55rem; }
+body.spotify-music-body audio { width: 100%; accent-color: #1ed760; }
+body.spotify-music-body button,
+body.spotify-music-body .song-file-button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: .4rem;
+    min-height: 2.5rem;
+    padding: .55rem .8rem;
+    border: 1px solid transparent;
+    border-radius: 999px;
+    background: #1ed760;
+    color: #092014;
+    font: 800 .78rem "Segoe UI",Arial,sans-serif;
+    text-decoration: none;
+    cursor: pointer;
+    transition: transform 160ms ease, filter 160ms ease;
+}
+body.spotify-music-body button:hover,
+body.spotify-music-body .song-file-button:hover { transform: translateY(-1px); filter: brightness(1.08); }
+body.spotify-music-body .song-lyrics-toggle { margin-top: .6rem; border-color: rgba(255,255,255,.18); background: transparent; color: #f5f7f5; }
+body.spotify-music-body .song-file-input { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0,0,0,0); white-space: nowrap; clip-path: inset(50%); }
+body.spotify-music-body .song-cover { display: block; width: min(100%, 12rem); aspect-ratio: 1; margin: .7rem 0; object-fit: cover; border-radius: 10px; box-shadow: 0 8px 18px rgba(0,0,0,.25); }
+body.spotify-music-body .song-cover[hidden] { display: none; }
+body.spotify-music-body .selected-song-player[hidden] { display: none; }
+
+body.spotify-music-body .playlist { display: grid; gap: .65rem; margin: 0; padding: 0; list-style: none; counter-reset: track; }
+body.spotify-music-body .playlist-track { display: grid; grid-template-columns: minmax(0,1fr) minmax(220px,.8fr); gap: 1rem; align-items: center; counter-increment: track; }
+body.spotify-music-body .playlist-track::before { content: counter(track, decimal-leading-zero); position: absolute; top: 1rem; left: .75rem; color: #1ed760; font-size: .7rem; font-weight: 900; }
+body.spotify-music-body .playlist-track > div { padding-left: 1.7rem; }
+body.spotify-music-body .playlist-track h3 { margin: 0; font-size: 1.12rem; }
+body.spotify-music-body .playlist-track p { margin: .25rem 0 0; color: var(--player-muted); font-size: .83rem; line-height: 1.6; }
+body.spotify-music-body .playlist-track .track-artist { color: #1ed760; font-size: .72rem; font-weight: 800; }
+body.spotify-music-body .playlist-status { min-height: 1.3rem; color: #dbe7de; font-size: .8rem; }
+
+body.spotify-music-body .song-details { color: var(--player-text); }
+body.spotify-music-body .song-details h2 { color: #fff; }
+body.spotify-music-body .song-details p,
+body.spotify-music-body .song-playback-status,
+body.spotify-music-body .song-lyrics label { color: var(--player-muted); }
+body.spotify-music-body .song-player-controls { color: var(--player-text); }
+body.spotify-music-body .song-play-button,
+body.spotify-music-body .song-video-open,
+body.spotify-music-body .song-file-button,
+body.spotify-music-body .song-discovery-close { background: #1ed760; color: #092014; }
+body.spotify-music-body .song-play-button:hover,
+body.spotify-music-body .song-play-button:focus-visible,
+body.spotify-music-body .song-video-open:hover,
+body.spotify-music-body .song-video-open:focus-visible { background: #67e995; color: #092014; }
+body.spotify-music-body .song-play-button:focus-visible,
+body.spotify-music-body .song-progress:focus-visible,
+body.spotify-music-body .song-file-input:focus-visible + .song-file-button,
+body.spotify-music-body .song-cover-input:focus-visible + .song-file-button { outline: 2px solid #67e995; outline-offset: 3px; }
+body.spotify-music-body .song-progress { accent-color: #1ed760; }
+body.spotify-music-body .song-time { color: #d3ddd6; }
+body.spotify-music-body .song-lyrics {
+    border-color: rgba(255,255,255,.14);
+    background: #202c24;
+    color: var(--player-text);
+}
+body.spotify-music-body .song-lyrics textarea {
+    border-color: rgba(255,255,255,.2);
+    background: #111a14;
+    color: var(--player-text);
+}
+body.spotify-music-body .song-lyrics textarea:focus-visible { outline-color: #1ed760; }
+body.spotify-music-body .song-lyrics-display {
+    border-left-color: #1ed760;
+    background: #263229;
+    color: var(--player-text);
+}
+body.spotify-music-body .song-video-status { color: #d3ddd6; }
+body.spotify-music-body .song-video-panel h2 { color: #f7faf7; }
+body.spotify-music-body .song-playback-status { color: #ffb4a8; }
+body.spotify-music-body .song-discovery-overlay,
+body.spotify-music-body .song-video-overlay { background: rgba(4,10,6,.82); backdrop-filter: blur(8px); }
+body.spotify-music-body .song-discovery-panel,
+body.spotify-music-body .song-video-panel { border: 1px solid rgba(255,255,255,.16); border-radius: 22px; background: #19231c; color: #f5f7f5; box-shadow: 0 20px 50px rgba(0,0,0,.45); }
+body.spotify-music-body .song-discovery-close { border: 0; }
+body.spotify-music-body .song-video-overlay-player { width: 100%; border-radius: 12px; }
+body.spotify-music-body .frank-footer { color: #dce8df; }
+
+.music-cursor {
+    position: fixed;
+    z-index: 2000;
+    display: grid;
+    width: 2.5rem;
+    height: 2.5rem;
+    place-items: center;
+    border: 1px solid rgba(30,215,96,.72);
+    border-radius: 50%;
+    background: rgba(12,28,18,.84);
+    box-shadow: 0 0 12px rgba(30,215,96,.58), inset 0 0 8px rgba(30,215,96,.2);
+    color: #67e995;
+    font: 800 1.65rem/1 "Segoe UI Symbol", "Segoe UI", sans-serif;
+    opacity: 0;
+    pointer-events: none;
+    text-shadow: 0 0 8px rgba(30,215,96,.9);
+    transform: translate(-50%,-50%) scale(.7);
+    transition: opacity 140ms ease, transform 140ms ease, color 140ms ease, background-color 140ms ease;
+}
+
+body.spotify-music-body > .music-cursor { position: fixed; z-index: 2000; }
+.music-cursor::before {
+    position: absolute;
+    inset: -5px;
+    border: 1px solid rgba(103,233,149,.72);
+    border-radius: 50%;
+    content: "";
+    pointer-events: none;
+    animation: music-cursor-ring 1.25s ease-out infinite;
+}
+.music-cursor::after {
+    position: absolute;
+    top: -0.5rem;
+    right: -0.55rem;
+    color: #b7ffc9;
+    content: "♪";
+    font: 800 1rem/1 "Segoe UI Symbol", "Segoe UI", sans-serif;
+    text-shadow: 0 0 8px rgba(30,215,96,.9);
+    animation: music-cursor-note 700ms ease-in-out infinite alternate;
+}
+.music-cursor.is-visible { opacity: 1; transform: translate(-50%,-50%) scale(1); }
+.music-cursor.is-hovering { background: #1ed760; color: #092014; transform: translate(-50%,-50%) scale(1.2); }
+.music-cursor.is-clicking { animation: music-cursor-click 260ms ease-out; }
+body.music-cursor-enabled,
+body.music-cursor-enabled * { cursor: none !important; }
+body.music-cursor-enabled input,
+body.music-cursor-enabled textarea,
+body.music-cursor-enabled [contenteditable="true"] { cursor: text !important; }
+
+@keyframes music-cursor-click {
+    50% { transform: translate(-50%,-50%) scale(1.5); }
+}
+@keyframes music-cursor-ring {
+    0% { opacity: .8; transform: scale(.75); }
+    100% { opacity: 0; transform: scale(1.55); }
+}
+@keyframes music-cursor-note {
+    to { transform: translateY(-4px) rotate(12deg); }
+}
+
+@media (max-width: 850px) {
+    body.spotify-music-body .music-list.favorite-song-list { grid-template-columns: repeat(2, minmax(0,1fr)); }
+}
+@media (max-width: 620px) {
+    body.spotify-music-body main { width: min(100% - 1rem, 1100px); margin-top: 1rem; }
+    body.spotify-music-body main > section, body.spotify-music-body .memory-section { padding: 1rem .8rem; border-radius: 18px; }
+    body.spotify-music-body .memories-page { width: min(100% - 1rem, 1100px); }
+    body.spotify-music-body .memories-intro { padding: 1.4rem 1rem; border-radius: 20px; }
+    body.spotify-music-body .menu-romantico { width: calc(100% - .5rem); max-width: calc(100% - .5rem); flex-wrap: wrap; border-radius: 20px; }
+    body.spotify-music-body .music-list.favorite-song-list { grid-template-columns: 1fr; gap: .6rem; }
+    body.spotify-music-body .playlist-track { grid-template-columns: 1fr; gap: .65rem; }
+    body.spotify-music-body .playlist-track audio { margin-left: 1.7rem; width: calc(100% - 1.7rem); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    body.spotify-music-body button, body.spotify-music-body .song-file-button,
+    body.spotify-music-body .playlist-track, body.spotify-music-body .music-list.favorite-song-list > li { transition: none; }
+    .music-cursor,
+    .music-cursor::before,
+    .music-cursor::after { transition: none; animation: none; }
+    .music-cursor.is-clicking { animation: none; }
+}
