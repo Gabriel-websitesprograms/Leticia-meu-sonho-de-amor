@@ -1,0 +1,8 @@
+# Arquivos locais que nao devem ser publicados
+*.exe
+/.vscode/
+/documentacao/backups/
+
+# Audios comerciais: publique apenas se tiver os direitos de distribuicao
+*.mp3
+/Musicas dedicada a leticia no site/Me namora/*.mp4
